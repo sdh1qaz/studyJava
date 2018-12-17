@@ -10,7 +10,7 @@ import java.util.List;
  * @Date:Created in 2018年11月13日
  */
 
-/*无论怎么走结果都是9个数相加，定义一个类，九个数就是九个属性，提供一个方法求和*/
+/*无论怎么走结果都是9个数相加，定义一个类，九个数就是九个属性，/*/
 class PossibilityOfAward{
 	
 	int[] poss = new int[9];
