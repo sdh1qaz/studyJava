@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class BubbleSort {
 	public static void main(String[] args) {
-		int[] arr = new int[] {1,4,2,9,7,3,8,5};
+		int[] arr = new int[] {1,4,2,9,7,3,8,5,100,56};
 		bubbleSort(arr);
 		System.out.println(Arrays.toString(arr));
 	}

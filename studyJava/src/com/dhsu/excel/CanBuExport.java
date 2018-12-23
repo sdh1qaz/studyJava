@@ -48,13 +48,13 @@ public class CanBuExport {
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		//导出8月的
-		export(sDir,dDir,4,21,5,21);
+		export(sDir,dDir,4,21,5,20);
 		//导出9月的
-		export(sDir,dDir,4,21,23,39);
+		export(sDir,dDir,4,21,22,37);
 		//导出10月的
-		export(sDir,dDir,4,18,41,51);
+		export(sDir,dDir,4,18,39,48);
 		//导出11月的
-		export(sDir,dDir,4,21,52,62);
+		export(sDir,dDir,4,21,50,59);
 	}
 	
 	/**
