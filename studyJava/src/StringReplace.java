@@ -55,20 +55,34 @@ public class StringReplace {
 	}
 	
 	
+	public static String replace_r_n(String str) {
+		if(str != null) {
+			return str.replaceAll("\\\\n", "\\\\\\\\n").replaceAll("\\\\r", "\\\\\\\\r");
+		} else {
+			return str;
+		}
+	}
+	
     public static void main(String[] args) {
-    	String str = "09月份您产生其他费152元";
-    	System.out.println(addN2BeforeMon(str));
+    	/*String str = "09月份您产生其他费152元";
+    	System.out.println(addN2BeforeMon(str));*/
 		/*String regex = "如果[\\s\\S]*一遍[\\s\\S]*请说[\\s\\S]*名称";
 		String teString = "如果，如果如水电费规划局果果你，，56788）（）键一遍哈杀手锏请说科3456789技部名称";
 		String result = teString.replaceAll(regex, "替换了");
 		System.out.println(result);*/
-    	/*String teString = "你好\n大海\r\n我爱你";
-    	System.out.println(teString);
-    	String after = teString.replaceAll("\\n", "\\\\n").replaceAll("\\r\\n", "\\\\r\\\\n");
+    	String teString = "你好\\n大海\\r\\n我爱你";
+    	/*System.out.println(teString);
+    	String after = teString.replaceAll("\\n", "\\\\n").replaceAll("\\r", "\\\\r");
     	System.out.println("**********************************");
     	System.out.println(after);
     	System.out.println("**********************************");
     	System.out.println("你好\\n大海\\r\\n我爱你");*/
+    	System.out.println(teString);
+    	String aa = replace_r_n(teString);
+    	System.out.println(replace_r_n(aa));
+    	
+    	System.out.println("\\\\n");
+    	
     	
     	/*String str = "你好，目前使用的是98元套餐。(201806)";
     	System.out.println("替换前：" + str);

@@ -31,6 +31,7 @@ public class DbOperate {
 			// 打开链接
 			System.out.println("连接数据库...");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			Connection connection = DriverManager.getConnection(DB_URL, USER, PASS);
 			// 执行查询
 			System.out.println(" 实例化Statement对象...");
 			for (long i = 0; i < 100000000; i++) {
