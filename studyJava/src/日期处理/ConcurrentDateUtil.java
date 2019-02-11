@@ -1,4 +1,4 @@
-package com.dhsu.date;
+package 日期处理;
 
 import java.text.DateFormat;
 import java.text.ParseException;
