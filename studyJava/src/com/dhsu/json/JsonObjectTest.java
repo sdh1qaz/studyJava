@@ -13,6 +13,27 @@ import com.alibaba.fastjson.JSONObject;
  */
 
 public class JsonObjectTest {
+	
+	@Test
+	public void getObjFromJson() {
+		//json数据转化为字符串
+		String jStu = "{\r\n" + 
+				"    \"student\": {\r\n" + 
+				"        \"name\": \"张三\",\r\n" + 
+				"        \"age\": 20,\r\n" + 
+				"        \"score\": {\r\n" + 
+				"            \"语文\": \"90\",\r\n" + 
+				"            \"数学\": \"100\",\r\n" + 
+				"            \"英语\": \"80\"\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"}"; 
+		//json字符串转化为JsonObject
+		JSONObject stuObj = JSONObject.parseObject(jStu);
+		//取得张三的语文成绩
+		String score = stuObj.getJSONObject("student").getJSONObject("score").getString("语文");
+		System.out.println("张三的语文成绩：" + score);
+	}
 
 	// 获取jsonObject中total值
 	@Test
