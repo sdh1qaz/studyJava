@@ -1,5 +1,7 @@
 package com.dhsu.json;
 
+import java.util.Iterator;
+
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
@@ -13,6 +15,29 @@ import com.alibaba.fastjson.JSONObject;
  */
 
 public class JsonObjectTest {
+	
+	@Test
+	public void getKeysFromJson() {
+		//json数据转化为字符串
+		String jStu = "{\r\n" + 
+				"    \"student\": {\r\n" + 
+				"        \"name\": \"张三\",\r\n" + 
+				"        \"age\": 20,\r\n" + 
+				"        \"score\": {\r\n" + 
+				"            \"语文\": \"90\",\r\n" + 
+				"            \"数学\": \"100\",\r\n" + 
+				"            \"英语\": \"80\"\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"}"; 
+		//json字符串转化为JsonObject
+		JSONObject stuObj = JSONObject.parseObject(jStu);
+		//取得张三的语文成绩
+		Iterator<String> it = stuObj.keySet().iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+	}
 	
 	@Test
 	public void getObjFromJson() {
@@ -164,8 +189,16 @@ public class JsonObjectTest {
 		JSONObject baseInfo = (JSONObject)jsonObj.getJSONObject("object").getJSONArray("resultList").get(0);
 		//获取宽带状态status
 		String status = baseInfo.getJSONObject("baseInfo").getString("osStatus");
+		String flag = jsonObj.getJSONObject("object").getString("flag");
 		System.out.println(baseInfo);
 		System.out.println(status);
+		System.out.println(flag);
+		
+		Iterator<String> it = jsonObj.keySet().iterator();
+		while(it.hasNext()) {
+			System.out.println("********************");
+			System.out.println(it.next());
+		}
 	}
 	
 	//2.4.0  查看一键清理记录
@@ -203,6 +236,7 @@ public class JsonObjectTest {
 				"    }\r\n" + 
 				"}";
 		JSONObject jsonObj = JSONObject.parseObject(jsonStr);
+		
 		int cleanListSize = jsonObj.getJSONObject("object").getIntValue("cleanListSize");
 		System.out.println(cleanListSize);
 	}

@@ -17,19 +17,34 @@ import org.junit.Test;
  * @Date:Created in 2018年12月24日
  */
 
-public class CalendarTest {
+public class Calendar_DateTest {
+	
+	//截取日期字符串
+	@Test
+	public void testDate() throws ParseException {
+		Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2019-02-24 04:29:09");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		String dString = sdf.format(date);
+		//dString = dString.replaceAll("0", replacement)
+		System.out.println(dString);
+	}
 	
 	
 	/**使用Date近两小时的表示方法，startTime表示两小时前,endTime表示现在*/
 	@Test
 	public void twoHoursBefore() {
-		Date d = new Date();
+		/*Date d = new Date();
 		int hours = d.getHours();
 		String endTime = d.toLocaleString();
 		d.setHours(hours - 2);
 		String startTime = d.toLocaleString();
-		System.out.println(startTime + "\n" + endTime);
+		System.out.println(startTime + "\n" + endTime);*/
+		Calendar c = Calendar.getInstance();
+		System.out.println(c.get(Calendar.MONTH + 1));
+		String s = Integer.toString(c.get(Calendar.YEAR) * 100 + c.get(Calendar.MONTH) + 1);
+		System.out.println(s);
 	}
+	
 	
 	/**使用LocalDate，近两小时的表示方法，startTime表示两小时前,endTime表示现在*/
 	@Test
