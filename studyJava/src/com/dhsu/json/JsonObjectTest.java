@@ -190,7 +190,7 @@ public class JsonObjectTest {
 		//获取宽带状态status
 		String status = baseInfo.getJSONObject("baseInfo").getString("osStatus");
 		String flag = jsonObj.getJSONObject("object").getString("flag");
-		System.out.println(baseInfo);
+		/*System.out.println(baseInfo);
 		System.out.println(status);
 		System.out.println(flag);
 		
@@ -198,7 +198,10 @@ public class JsonObjectTest {
 		while(it.hasNext()) {
 			System.out.println("********************");
 			System.out.println(it.next());
-		}
+		}*/
+		
+		String installAddress = baseInfo.getJSONObject("baseInfo").getString("installAddress");
+		System.out.println(installAddress);
 	}
 	
 	//2.4.0  查看一键清理记录
@@ -257,6 +260,41 @@ public class JsonObjectTest {
 		JSONObject jsonObj = JSONObject.parseObject(jsonStr);
 		int resultFlag = jsonObj.getJSONObject("object").getIntValue("resultFlag");
 		System.out.println(resultFlag);
+	}
+	
+	//辽宁2.5.0 是否绑定宽带
+	@Test
+	public void testIsBandBoard() {
+		String jsonStr = "{\r\n" + 
+						"    \"rtnCode\": \"0\",\r\n" + 
+						"    \"rtnMsg\": \"成功!\",\r\n" + 
+						"    \"bean\": {},\r\n" + 
+						"    \"beans\": [],\r\n" + 
+						"    \"object\": {\r\n" + 
+						"        \"respDesc\": \"success\",\r\n" + 
+						"        \"respCode\": \"0\",\r\n" + 
+						"        \"object\": {\r\n" + 
+						"            \"result\": {\r\n" + 
+						"                \"srvCode\": \"D15114181481\",\r\n" + 
+						"                \"dynamicParams\": {\r\n" + 
+						"                    \"loginName\": \"15114181481@net\"\r\n" + 
+						"                },\r\n" + 
+						"                \"runCode\": \"0\",\r\n" + 
+						"                \"custId\": \"100066680929\",\r\n" + 
+						"                \"runTime\": \"2015-12-06 09:55:50.0\",\r\n" + 
+						"                \"idNo\": \"\"\r\n" + 
+						"            },\r\n" + 
+						"            \"respDesc\": \"success\",\r\n" + 
+						"            \"respCode\": \"0\",\r\n" + 
+						"            \"resultRows\": \"1\"\r\n" + 
+						"        }\r\n" + 
+						"    }\r\n" + 
+						"}";
+		JSONObject jsonObj = JSONObject.parseObject(jsonStr);
+		String resultFlag = jsonObj.getJSONObject("object").getJSONObject("object").getString("resultRows");
+		if (Integer.valueOf(resultFlag) > 0) {
+			System.out.println("resultFlag: " + resultFlag);
+		}
 	}
 
 	

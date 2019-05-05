@@ -3,6 +3,7 @@ package 日期处理;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +19,12 @@ import org.junit.Test;
  */
 
 public class Calendar_DateTest {
+	
+	//获取当前年月
+	@Test
+	public void printCurYearMon() {
+		System.out.println(new SimpleDateFormat("yyyyMM").format(new Date()));
+	}
 	
 	//截取日期字符串
 	@Test
@@ -88,6 +95,24 @@ public class Calendar_DateTest {
 		String startTime = sd.format(new Date(t));
 		System.out.println(endTime);
 		System.out.println(startTime);
+	}
+	
+	/**
+	* @Description: TODO(使用Date，近两小时的表示方法，startTime表示两小时前,endTime表示现在*)  
+	* @param @param args 
+	* @return void 
+	* @throws
+	*/
+	@Test
+	public void getYearStr() {
+		//声明日期格式
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy");
+		//当前日期
+		String year = sd.format(new Date());
+		System.out.println(year);
+		String yearMonth = "201901";
+		System.out.println(yearMonth.substring(0, 4));
+		
 	}
 	
 	
