@@ -115,6 +115,17 @@ public class Calendar_DateTest {
 		
 	}
 	
+	@Test
+	public void addN2() {
+		//声明日期格式
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy年MM月dd日");
+		//当前日期
+		String year = sd.format(new Date());
+		System.out.println(year);
+		year = year.substring(0, 5) + "[n2]" + year.substring(5);
+		System.out.println(year);
+	}
+	
 	
 	public static void main(String[] args) {
 		String yearMonth = "201901";
