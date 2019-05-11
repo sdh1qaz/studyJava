@@ -34,7 +34,8 @@ public class Priority {
 			thread.start();
 		}
 		notstart = false;
-		TimeUnit.SECONDS.sleep(10);
+		//线程休眠2秒钟
+		TimeUnit.SECONDS.sleep(2);
 		notend = false;
 		
 		for(Job job : jobs) {
@@ -54,7 +55,7 @@ public class Priority {
 		//线程真正执行的部分
 		public void run() {
 			while(notstart) {
-				//让优先级更高的线程执行
+				//让出cpu的使用权，由运行状态进入就绪状态，重新竞争。可能还是自己使用
 				Thread.yield();
 			}
 			while(notend) {
