@@ -34,6 +34,7 @@ public class JoinTest {
 			try {
 				thread.join();
 				System.out.println(Thread.currentThread().getName() + " 开始运行.");
+				TimeUnit.SECONDS.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
