@@ -20,6 +20,25 @@ import org.junit.Test;
 
 public class Calendar_DateTest {
 	
+	//根据当前年月，获取本月，上月和下月的年月
+	@Test
+	public void getLastAndNextMonth() {
+		Calendar calendar = Calendar.getInstance();
+		//本月
+		String nowMonth = new SimpleDateFormat("yyyyMM").format(calendar.getTime());
+		System.out.println("上月：" + nowMonth);
+		//上月
+		calendar.add(Calendar.MONTH, -1);
+		String lastMonth = new SimpleDateFormat("yyyyMM").format(calendar.getTime());
+		System.out.println("上月：" + lastMonth);
+		//下月
+		calendar.add(Calendar.MONTH, 2);
+		String nextMonth = new SimpleDateFormat("yyyyMM").format(calendar.getTime());
+		System.out.println("下月：" + nextMonth);
+		
+	}
+	
+	
 	//获取当前年月
 	@Test
 	public void printCurYearMon() {
