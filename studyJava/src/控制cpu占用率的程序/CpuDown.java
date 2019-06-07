@@ -1,4 +1,4 @@
-package 一段cpu百分百的java程序;
+package 控制cpu占用率的程序;
 
 /**
  * @ClassName： CpuDown
