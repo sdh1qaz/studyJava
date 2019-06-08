@@ -34,6 +34,8 @@ public class JsonObjectTest {
 				"}"; 
 		//json字符串转化为JsonObject
 		JSONObject stuObj = JSONObject.parseObject(jStu);
+		System.out.println("观察JsonObject对象的toString方法打印：" + stuObj.toString());
+		System.out.println("观察JsonObject对象的toJsonString方法打印：" + stuObj.toJSONString());
 		//取得张三的语文成绩
 		Iterator<String> it = stuObj.keySet().iterator();
 		while(it.hasNext()) {
