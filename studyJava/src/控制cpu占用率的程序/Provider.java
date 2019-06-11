@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @Date:Created in 2019年6月11日
  */
 //参考：https://blog.csdn.net/godloveleo9527/article/details/46665425
-public class CpuTenPer extends Thread {
+public class Provider extends Thread {
 
 	//需要输入CPU逻辑核数，然后再输入总时毫秒数来微调
 	public static void main(String[] args) {
@@ -25,10 +25,13 @@ public class CpuTenPer extends Thread {
 		/*这里开启t_start=10个线程，忙时比（忙时除以总时）b_i=t/t_start=4.8/10=0.48*/
 		/*从键盘传入逻辑核数l*/
 		Scanner sc = new Scanner(System.in);
-		System.out.println("请输入cpu的逻辑核数：");
-		double b_i = Integer.parseInt(sc.nextLine()) * 0.01;
-		System.out.println("请输入线程单位时长ms：");
-		int unit = Integer.parseInt(sc.nextLine());
+		
+		System.out.println("输入的需要占用的cpu的百分比(如10%就是输入0.1)：" + args[0]);
+		System.out.println("输入cpu的逻辑核数：" + args[1]);
+		System.out.println("输入的线程单位时长ms：" + args[2]);
+		double p = Double.parseDouble(args[0]);
+		double b_i = Integer.parseInt(args[1]) * 0.1 * p;
+		int unit = Integer.parseInt(args[2]);
 		sc.close();
 		System.out.println("程序开始运行.....");
 		for(int i=0;i<10;i++) {
