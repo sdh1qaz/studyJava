@@ -8,22 +8,19 @@ package 控制cpu占用率的程序;
  */
 
 public class Provider extends Thread {
-	//参考：https://blog.csdn.net/godloveleo9527/article/details/46665425
-	//需要输入CPU逻辑核数，然后再输入总时毫秒数来微调
+	/*参考：https://blog.csdn.net/godloveleo9527/article/details/46665425
+	需要在运行时传入以下参数：需要的CPU占用百分比；CPU逻辑核数；线程单位总时毫秒数（可微调）*/
 	public static void main(String[] args) {
 		
-		/* 启动四个线程，电脑逻辑cpu为4个，一个线程无限循环
+		/* 解释：假如启动四个线程，电脑逻辑cpu为4个，一个线程无限循环
 		cpu的占用率为25%，四个线程就是100%。
 		逻辑cpu个数为l，死循环线程的个数为t，cpu占用率为p，它们之间的关系：
 		etc：l=4，t=1，p=25%，p = t / l * 100%  
 		已知l=4，p=0.1，t=？，t=p*l=0.1*4=0.4 
 		0.4个线程怎样实现？只能设置线程在一个时间单位(1)里的忙时比（忙时除以总时）b_i=0.4了*/
 		
-		/*cpu逻辑逻辑核l=48，占比p=0.1，需要的死循环线程数t=p*l=0.1*48=4.8*/
-		/*这里开启t_start=10个线程，忙时比（忙时除以总时）b_i=t/t_start=4.8/10=0.48*/
-		/*从键盘传入逻辑核数l*/
-		/*Scanner sc = new Scanner(System.in);*/
-		/*sc.close();*/
+		/*cpu逻辑逻辑核l=48，占比p=0.1，需要的死循环线程数t=p*l=0.1*48=4.8
+		这里开启t_start=10个线程，忙时比（忙时除以总时）b_i=t/t_start=4.8/10=0.48*/
 		System.out.println("需要占用的cpu的百分比(如10%就是输入0.1)：" + args[0]);
 		System.out.println("cpu逻辑核数：" + args[1]);
 		System.out.println("线程单位时长ms：" + args[2]);
@@ -51,7 +48,7 @@ public class Provider extends Thread {
 
 		@Override
 		public void run() {
-			//忙时比（忙时除以总时）=busyTime/(busyTime+idleTime)
+			//忙时比b_i=busyTime/(busyTime+idleTime)
 			//忙时
 			long busyTime = (long) (unit * b_i);
 			//闲时
@@ -62,7 +59,6 @@ public class Provider extends Thread {
 				//cpu忙 busyTime 毫秒
 				while ((System.currentTimeMillis() - nowSys) <= busyTime) {
 				}
-				
 				try {
 					//cpu闲 idleTime 毫秒
 					Thread.sleep(idleTime);
