@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-public class GetDataBySql {
+public class OperateDataBySql {
 	
 	/**
 	 * 实现数据库的导出（方法1）
@@ -79,8 +79,24 @@ public class GetDataBySql {
 		return outStr;
 	}
 	
+	public static void exportDataSqlFile() {
+		try {
+			Runtime rt = Runtime.getRuntime();
+			// 调用 调用mysql的安装目录的命令
+			rt.exec("E:\\mysql-5.6.24-win32\\bin\\mysqldump "
+					+ "-uroot -padmin tale >E:\\tale.sql");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Test
 	public void testexportDataSql() {
 		System.out.println(exportDataSql());
+	}
+	
+	@Test
+	public void testExportDataSqlFile() {
+		exportDataSqlFile();
 	}
 }

@@ -1,4 +1,4 @@
-package java使用qq邮箱读取邮件;
+package 小书包数据同步;
 /**
  * 测试入口 
  * @author SuDenghui
@@ -14,7 +14,7 @@ import javax.mail.Store;
 
 import org.junit.Test;
 
-public class MailTest
+public class MailRead
 {
 	/**
 	 * 本地小书包更新
@@ -25,8 +25,8 @@ public class MailTest
         try
         {
             String host = "pop.qq.com";
-            String username = "348673242@qq.com";//要读取的邮箱
-            String password = "racrnqyoeglnbhea";//生成的授权码
+            String username = Constants.readEmail;//要读取的邮箱
+            String password = Constants.authpwd;//生成的授权码
 
             Properties p = new Properties();
             p.setProperty("mail.pop3.host", "pop.qq.com"); // 按需要更改

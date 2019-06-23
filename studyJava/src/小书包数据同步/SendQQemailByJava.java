@@ -1,11 +1,8 @@
-package java使用qq邮箱发邮件;
+package 小书包数据同步;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.Test;
-
-import com.dhsu.jdbc.读取数据库转换为sql.OperateDataBySql;
-
 /**
  * java操作qq邮箱收发邮件
  * 
@@ -16,6 +13,10 @@ public class SendQQemailByJava {
 	/**
 	 * 本地本分数据上传，发送邮件
 	 */
+	public static void SendEmail() {
+		sendEmail(OperateDataBySql.exportDataSql());
+	}
+	
 	@Test
 	public void testSendEmail() {
 		sendEmail(OperateDataBySql.exportDataSql());
@@ -28,11 +29,11 @@ public class SendQQemailByJava {
 		EmailPojo ep = new EmailPojo();
 		ep.setHostname("smtp.qq.com");
 		ep.setPort(465);
-		ep.setSendEmail("348673242@qq.com");
-		ep.setReceiveEmail("348673242@qq.com");
-		ep.setAuth("racrnqyoeglnbhea");
-		ep.setSubJect("小书包数据同步");
-		ep.setSendName("小书包");
+		ep.setSendEmail(Constants.sendEmail);
+		ep.setReceiveEmail(Constants.readEmail);
+		ep.setAuth(Constants.authpwd);
+		ep.setSubJect(Constants.subject);
+		ep.setSendName(Constants.sendName);
 		ep.setMsg(msg);
 		sendEmail(ep);
 	}
