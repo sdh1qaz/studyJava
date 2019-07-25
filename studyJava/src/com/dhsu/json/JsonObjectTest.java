@@ -1,11 +1,16 @@
 package com.dhsu.json;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
 import org.junit.Test;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  * @ClassName： JsonObjectTest
@@ -17,6 +22,61 @@ import com.alibaba.fastjson.JSONObject;
 
 
 public class JsonObjectTest {
+	
+	@Test
+	public void tes() {
+		double d = 0.00;
+		System.out.println(d > 0);
+		String s = "2019071200";
+		System.out.println(s.substring(0, 6));
+		System.out.println(new SimpleDateFormat("yyyyMM").format(new Date()));
+	}
+
+	//判断是json对象还是json数组
+	@Test
+	public void tes2() {
+		//json数据转化为字符串
+		String jStu = "{\r\n" + 
+				"	\"student\": {\r\n" + 
+				"		\"name\": \"张三\",\r\n" + 
+				"		\"age\": 20,\r\n" + 
+				"		\"score\": [{\r\n" + 
+				"			\"语文\": \"90\",\r\n" + 
+				"			\"数学\": \"100\",\r\n" + 
+				"			\"英语\": \"80\"\r\n" + 
+				"		}, {\r\n" + 
+				"			\"语文\": \"90\",\r\n" + 
+				"			\"数学\": \"100\",\r\n" + 
+				"			\"英语\": \"80\"\r\n" + 
+				"		}]\r\n" + 
+				"	}\r\n" + 
+				"}";
+		JSONObject stuObj = JSONObject.parseObject(jStu);
+		
+		Object obj = stuObj.getJSONObject("student").get("score");
+		JSONArray j = (JSONArray)obj;
+		System.out.println(j.size());
+		System.out.println(obj instanceof JSONArray);
+				
+	}
+	
+	
+	@Test
+	public void tes1() {
+		//模板字符串
+		String csfInParams = "{\r\n" + 
+				"	\"params\": {\r\n" + 
+				"		\"loginNo\": \"Y18600IVR\",\r\n" + 
+				"		\"masterServId\": \"1001\",\r\n" + 
+				"		\"orderBy\": \"EFF_DATE_DESC\",\r\n" + 
+				"		\"prodPrcid\": \"${prodPrcid}\",\r\n" + 
+				"		\"qryMode\": \"PRC\",\r\n" + 
+				"		\"serviceNo\": \"${telnum}\"\r\n" + 
+				"	}\r\n" + 
+				"}";
+		csfInParams = csfInParams.replace("${prodPrcid}", "17737112692");
+		System.out.println(csfInParams);
+	}
 	
 	@Test
 	public void getKeysFromJson() {
@@ -41,6 +101,47 @@ public class JsonObjectTest {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
+	}
+	
+	@Test
+	public void getKeysFromJson1() {
+		//json数据转化为字符串
+		String jsonStr = "{\r\n" + 
+				"    \"rtnCode\": \"0\",\r\n" + 
+				"    \"rtnMsg\": \"成功!\",\r\n" + 
+				"    \"bean\": {\r\n" + 
+				"         \"returnCode\":\"\",\r\n" + 
+				"        \"returnMsg\": \"ok!\",\r\n" + 
+				"        \"userMsg\": \"处理成功!\",\r\n" + 
+				"        \"promptMsg\": \"\",\r\n" + 
+				"        \"detailMsg\": \"OK!\"\r\n" + 
+				"    },\r\n" + 
+				"    \"beans\": [],\r\n" + 
+				"    \"object\": {\r\n" + 
+				"        \"outData.data\": {\r\n" + 
+				"            \"idNo\": 11310005864525,\r\n" + 
+				"            \"createTime\": \"20170201000000\",\r\n" + 
+				"            \"creditMark\": \"四星\",\r\n" + 
+				"            \"remark\": \"\",\r\n" + 
+				"            \"mainStatus\": \"01\",\r\n" + 
+				"            \"effDate\": \"20170401000000\",\r\n" + 
+				"            \"expDate\": \"20180331235959\",\r\n" + 
+				"            \"effFlag\": \"1\",\r\n" + 
+				"            \"systemStatus\": \"01\",\r\n" + 
+				"            \"runCode\": \"A\",\r\n" + 
+				"            \"yearArpu\": \"126\",\r\n" + 
+				"            \"starScore\": \"247\",\r\n" + 
+				"            \"starLevel\": \"5\",\r\n" + 
+				"            \"phoneNo\": \"18256096817\",\r\n" + 
+				"            \"mainStatusCash\": \"100\",\r\n" + 
+				"            \"shutdownTimes\": \"0\"\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"}";
+		//json字符串转化为JsonObject
+		JSONObject jsonObj = JSONObject.parseObject(jsonStr);
+		//取得张三的语文成绩
+		System.out.println(jsonObj.getJSONObject("object").getJSONObject("outData.data").getString("starLevel"));
 	}
 	
 	@Test
