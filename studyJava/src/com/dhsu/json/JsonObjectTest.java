@@ -41,7 +41,7 @@ public class JsonObjectTest {
 				"		\"name\": \"张三\",\r\n" + 
 				"		\"age\": 20,\r\n" + 
 				"		\"score\": [{\r\n" + 
-				"			\"语文\": \"90\",\r\n" + 
+				"			\"语文\": \"91\",\r\n" + 
 				"			\"数学\": \"100\",\r\n" + 
 				"			\"英语\": \"80\"\r\n" + 
 				"		}, {\r\n" + 
@@ -52,11 +52,15 @@ public class JsonObjectTest {
 				"	}\r\n" + 
 				"}";
 		JSONObject stuObj = JSONObject.parseObject(jStu);
-		
+		System.out.println(jStu);
 		Object obj = stuObj.getJSONObject("student").get("score");
 		JSONArray j = (JSONArray)obj;
-		System.out.println(j.size());
+		System.out.println(j.getJSONObject(1).getString("语文"));
+		/*System.out.println(j.size());
 		System.out.println(obj instanceof JSONArray);
+		
+		System.out.println(stuObj.getString("student.name"));
+		System.out.println(stuObj.getJSONObject("student").getString("name"))*/;
 				
 	}
 	
@@ -101,6 +105,26 @@ public class JsonObjectTest {
 		while(it.hasNext()) {
 			System.out.println(it.next());
 		}
+	}
+	
+	@Test
+	public void getKeysFromJson2() {
+		//json数据转化为字符串
+		String jStu = "{\r\n" + 
+				"    \"student\": {\r\n" + 
+				"        \"name\": \"张三\",\r\n" + 
+				"        \"age\": 20,\r\n" + 
+				"        \"score\": {\r\n" + 
+				"            \"语文\": \"90\",\r\n" + 
+				"            \"数学\": \"100\",\r\n" + 
+				"            \"英语\": \"80\"\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"}"; 
+		//json字符串转化为JsonObject
+		JSONObject stuObj = JSONObject.parseObject(jStu);
+		JSONArray ja = stuObj.getJSONObject("student").getJSONArray("score");
+		System.out.println(ja.toJSONString());
 	}
 	
 	@Test

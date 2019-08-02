@@ -7,6 +7,7 @@ import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -19,6 +20,107 @@ import org.junit.Test;
  */
 
 public class Calendar_DateTest {
+	
+	/**
+	 * 生成yyyymmddhhmiss格式的系统时间
+	 */
+	@Test
+	public void get() {
+		System.out.println(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "902" +
+				String.format("%08d", new Random().nextInt(10000000)));
+	}
+	
+	
+	
+	
+	/**
+	 * 判断一个日期（yyyy/MM/dd HH:mm:ss）是否在近半年内
+	 */
+	@Test
+	public void isINHalfYears() {
+		String date = "2019/01/28 13:00:00";
+		//转化成yyyy年MM月dd日
+		date = new SimpleDateFormat("yyyy年MM月dd日").format(new Date(date));
+		System.out.println(date);
+		//半年前的日期
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -6);
+		Date d = cal.getTime();
+		String beginDate = new SimpleDateFormat("yyyy年MM月dd日").format(d);
+		System.out.println(beginDate);
+		System.out.println(date.compareTo(beginDate) > 0);
+		
+	}
+	
+	/**
+	 * 获取上月年月yyyyMM
+	 */
+	@Test
+	public void getLastMon() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -1);
+		Date d = cal.getTime();
+		System.out.println(new SimpleDateFormat("yyyyMM").format(d));
+	}
+	
+	/**
+	 * 方法2 2019/01/18 13:00:00 转化成 2019年01月18日
+	 */
+	@Test
+	public void test2() {
+		String d = "2019/01/18 13:00:00";
+		Date date = new Date(d);
+		System.out.println(new SimpleDateFormat("yyyy年MM月dd日").format(date));
+	}
+	
+	/**
+	 * 方法22019/01/18 13:00:00 转化成 2019年01月18日
+	 * @throws ParseException 
+	 */
+	@Test
+	public void test22() throws ParseException {
+		String d = "2019/01/18 13:00:00";
+		Date date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").parse(d);
+		System.out.println(new SimpleDateFormat("yyyy年MM月dd日").format(date));
+	}
+	
+	
+	/**
+	 * 获取当前系统年月日（yyyyMMdd）
+	 */
+	@Test
+	public void testNowYMD() {
+		//当前系统年月日（yyyyMMdd）
+		String endDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		System.out.println(endDate);
+		
+	}
+	
+	/**
+	 * 获取当前系统年月日的前7天
+	 */
+	@Test
+	public void get7DaysBefore() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_YEAR, -7);
+		Date date = cal.getTime();
+		String beginDate = new SimpleDateFormat("yyyyMMdd").format(date);
+		System.out.println(beginDate);
+		
+	}
+	
+	/**
+	 * 获取当前系统年月日（yyyyMMdd）和半年前的年月日（yyyyMMdd）
+	 */
+	@Test
+	public void testHalfYears() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -6);
+		Date date = cal.getTime();
+		String beginDate = new SimpleDateFormat("yyyyMMdd").format(date);
+		System.out.println(beginDate);
+		
+	}
 	
 	//根据当前年月，获取本月，上月和下月的年月
 	@Test

@@ -1,5 +1,7 @@
 import java.util.UUID;
 
+import org.junit.Test;
+
 /**
  * @ClassName： StringReplace
  * @Author: dhSu
@@ -8,6 +10,17 @@ import java.util.UUID;
  */
 
 public class StringReplace {
+	
+	
+	@Test
+	public void test1() {
+		String s = "201900000-201899999";
+		String[] arr = s.split("-");
+		System.out.println(arr[0]);
+		System.out.println(arr[1]);
+		System.out.println(s.replaceAll("-", "****"));
+	}
+	
 	/**
 	* @Description: TODO(给定字符串在所有年份（2018）前面加上[n1],年份之后加上[n2])  
 	* @param  str:被替换的字符串
