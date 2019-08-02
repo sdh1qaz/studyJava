@@ -1,4 +1,4 @@
-package 学习json.freemarker.jdbc;
+package freemarker的使用;
 
 import java.util.Map;
 

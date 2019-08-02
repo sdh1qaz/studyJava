@@ -1,4 +1,4 @@
-package 学习json.freemarker.jdbc;
+package freemarker的使用;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,8 +12,6 @@ import java.util.Map;
 
 import javax.print.DocFlavor.STRING;
 
-import com.dhsu.json.CsfJSonUtils;
-
 import freemarker.cache.StringTemplateLoader;
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
@@ -21,6 +19,7 @@ import freemarker.template.MalformedTemplateNameException;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
+import json的使用.CsfJSonUtils;
 import junit.framework.TestFailure;
 
 import org.junit.Test;

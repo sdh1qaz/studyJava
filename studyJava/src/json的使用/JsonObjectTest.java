@@ -1,4 +1,4 @@
-package com.dhsu.json;
+package json的使用;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

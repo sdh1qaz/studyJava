@@ -1,4 +1,4 @@
-package com.dhsu.stringutils;
+package 字符串操作StringUtils;
 
 import org.junit.Test;
 
