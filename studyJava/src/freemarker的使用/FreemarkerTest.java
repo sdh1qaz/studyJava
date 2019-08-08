@@ -198,8 +198,8 @@ public class FreemarkerTest {
 		HashMap<String, Object> paramMap = new HashMap<>();
 		HashMap<String, Object> map = new HashMap<>();
 		//放入学生对象
-		/*map.put("套餐1", "套餐1每月100元");
-		map.put("套餐2", "套餐2每月100元");*/
+		map.put("套餐1", "套餐1每月100元");
+		map.put("套餐2", "套餐2每月100元");
 		paramMap.put("map", map);
 		paramMap.put("prodPrcNameMain", "飞享套餐188元");
 		paramMap.put("prodPrcDescMain", "该套餐免费");
@@ -215,12 +215,36 @@ public class FreemarkerTest {
 	}
 	
 	/**
+	 * freemarker遍历map
+	 * @throws Exception 
+	 */
+	@Test
+	public void testFreemarker2() throws Exception {
+		String template = "【已办业务查询】尊敬的客户，您好！您目前手机已开通业务有：\\r\\n一、主套餐：${prodPrcNameMain}。套餐资费详情：${prodPrcDescMain}\\r\\n二、<#if map?size gt 0>除主套餐外，您订购的业务及月功能费如下：<#list map?keys as key>${key}${map[\"${key}\"]}</#list>如需退订主套餐以外业务请发送77至10086按提示操作即可。<#else>除主套餐外，暂未查询到其他业务。您也可以发送免费短信77至10086按提示查询退订已开通业务。</#if>以上国内资费不包含港澳台。【中国移动】";
+		System.out.println("模板：" + template.toString());
+		
+		//放入数据
+		HashMap<String, Object> paramMap = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
+		//放入学生对象
+		map.put("套餐1", "套餐1每月100元");
+		map.put("套餐2", "套餐2每月100元");
+		paramMap.put("map", map);
+		paramMap.put("prodPrcNameMain", "飞享套餐188元");
+		paramMap.put("prodPrcDescMain", "该套餐免费");
+		System.out.println("数据内容：" + paramMap);
+		
+		//模板转换的最终内容
+		System.out.println("模板填充后的内容：" + getContent(template,paramMap));
+	}
+	
+	/**
 	 * 安徽话费查询模版 ah0080101
 	 */
 	@Test
 	public void testFreemarkerah0080101(){
 		//模版
-		String template = "【流量剩余】尊敬的客户，您好！<#if rzllUflow??>您当日日租流量已用${rzllUflow}，<#elseif djrzllUflow??>${djrzllUflow}，</#if> <#if jwbUflow??>当月国内放心用流量已用${jwbUflow}，</#if> <#if gntsbUflow?? && gntsbUflow != \"0\" && gntsbUflow != \"0.00M\" && gntsbUflow != \"0.00\" >提速服务已用${gntsbUflow}。</#if> <#if xybxlllUflow?? && xybxlllUflow != \"0\" && xybxlllUflow != \"0.00M\" && xybxlllUflow != \"0.00\" >校园放心用流量已用xybxlllUflow，</#if> <#if xntsbUflow?? && xntsbUflow != \"0\" && xntsbUflow != \"0.00M\" && xntsbUflow != \"0.00\" >校园提速服务已用${xntsbUflow}。</#if> <#if newUsedFlow?? && newUsedFlow != \"0\" && newUsedFlow != \"0.00M\" && newUsedFlow != \"0.00\" >通用流量已用${newUsedFlow}，</#if> <#if newRestFlow?? && newRestFlow != \"0\" && newRestFlow != \"0.00M\" && newRestFlow != \"0.00\" >套餐内流量剩余${newRestFlow}，</#if> <#if domeresRflow?? && domeresRflow != \"0\" && domeresRflow != \"0.00M\" && domeresRflow != \"0.00\" >其中国内流量剩余${domeresRflow}（含国内结转流量），</#if> <#if provresRflow?? && provresRflow != \"0\" && provresRflow != \"0.00M\" && provresRflow != \"0.00\" >省内流量剩余${provresRflow}（含省内结转流量），</#if> <#if newIdleRflow?? && newIdleRflow != \"0\" && newIdleRflow != \"0.00M\" && newIdleRflow != \"0.00\" >另外，夜间流量剩余${newIdleRflow}（含夜间结转流量）。</#if> <#if cxUflow?? && cxUflow != \"0\" && cxUflow != \"0.00M\" && cxUflow != \"0.00\" >已使用套餐外优惠流量${cxUflow}，</#if> <#if cxRflow?? && cxRflow != \"0\" && cxRflow != \"0.00M\" && cxRflow != \"0.00\" >剩余套餐外优惠流量${cxRflow}， <#if cxxsRflow?? && cxxsRflow != \"0\" && cxxsRflow != \"0.00M\" && cxxsRflow != \"0.00\" >其中套餐外优惠夜间流量剩余${cxxsRflow}，</#if> <#if cxdmRflow?? && cxdmRflow != \"0\" && cxdmRflow != \"0.00M\" && cxdmRflow != \"0.00\" >套餐外优惠单模流量剩余${cxdmRflow}，</#if> <#if cxxyRflow?? && cxxyRflow != \"0\" && cxxyRflow != \"0.00M\" && cxxyRflow != \"0.00\" >套餐外优惠校园流量${cxxyRflow}，</#if> <#if cxsnRflow?? && cxsnRflow != \"0\" && cxsnRflow != \"0.00M\" && cxsnRflow != \"0.00\" >套餐外优惠省内流量剩余${cxsnRflow}，</#if> <#if cxsnRflow?? && cxsnRflow != \"0\" && cxsnRflow != \"0.00M\" && cxsnRflow != \"0.00\" >套餐外优惠国内流量剩余${cxgnRflow}，</#if></#if> <#if shareAllm?? && shareAllm != \"0\" && shareAllm != \"0.00M\" && shareAllm != \"0.00\" ><#if shareInfor.index_of(telnum) != -1>共享他人流量${shareAllm}。<#else>被他人共享流量${shareAllm}。</#if></#if>以上国内资费不包含港澳台。（3元1个G，流量任性用，办理请戳http://dx.10086.cn/IVR3y1G）【中国移动】"; 
+		String template = "<#if rzllUflow??>您当日日租流量已用${rzllUflow}，<#elseif djrzllUflow??>${djrzllUflow}，</#if> <#if jwbUflow??>当月国内放心用流量已用${jwbUflow}，</#if> <#if gntsbUflow?? && gntsbUflow != \"0\" && gntsbUflow != \"0.00M\" && gntsbUflow != \"0.00\" >提速服务已用${gntsbUflow}。</#if> <#if xybxlllUflow?? && xybxlllUflow != \"0\" && xybxlllUflow != \"0.00M\" && xybxlllUflow != \"0.00\" >校园放心用流量已用xybxlllUflow，</#if> <#if xntsbUflow?? && xntsbUflow != \"0\" && xntsbUflow != \"0.00M\" && xntsbUflow != \"0.00\" >校园提速服务已用${xntsbUflow}。</#if> <#if newUsedFlow?? && newUsedFlow != \"0\" && newUsedFlow != \"0.00M\" && newUsedFlow != \"0.00\" >通用流量已用${newUsedFlow}，</#if> <#if newRestFlow?? && newRestFlow != \"0\" && newRestFlow != \"0.00M\" && newRestFlow != \"0.00\" >套餐内流量剩余${newRestFlow}，</#if> <#if domeresRflow?? && domeresRflow != \"0\" && domeresRflow != \"0.00M\" && domeresRflow != \"0.00\" >其中国内流量剩余${domeresRflow}（含国内结转流量），</#if> <#if provresRflow?? && provresRflow != \"0\" && provresRflow != \"0.00M\" && provresRflow != \"0.00\" >省内流量剩余${provresRflow}（含省内结转流量），</#if> <#if newIdleRflow?? && newIdleRflow != \"0\" && newIdleRflow != \"0.00M\" && newIdleRflow != \"0.00\" >另外，夜间流量剩余${newIdleRflow}（含夜间结转流量）。</#if> <#if cxUflow?? && cxUflow != \"0\" && cxUflow != \"0.00M\" && cxUflow != \"0.00\" >已使用套餐外优惠流量${cxUflow}，</#if> <#if cxRflow?? && cxRflow != \"0\" && cxRflow != \"0.00M\" && cxRflow != \"0.00\" >剩余套餐外优惠流量${cxRflow}， <#if cxxsRflow?? && cxxsRflow != \"0\" && cxxsRflow != \"0.00M\" && cxxsRflow != \"0.00\" >其中套餐外优惠夜间流量剩余${cxxsRflow}，</#if> <#if cxdmRflow?? && cxdmRflow != \"0\" && cxdmRflow != \"0.00M\" && cxdmRflow != \"0.00\" >套餐外优惠单模流量剩余${cxdmRflow}，</#if> <#if cxxyRflow?? && cxxyRflow != \"0\" && cxxyRflow != \"0.00M\" && cxxyRflow != \"0.00\" >套餐外优惠校园流量${cxxyRflow}，</#if> <#if cxsnRflow?? && cxsnRflow != \"0\" && cxsnRflow != \"0.00M\" && cxsnRflow != \"0.00\" >套餐外优惠省内流量剩余${cxsnRflow}，</#if> <#if cxsnRflow?? && cxsnRflow != \"0\" && cxsnRflow != \"0.00M\" && cxsnRflow != \"0.00\" >套餐外优惠国内流量剩余${cxgnRflow}，</#if></#if> <#if shareAllm?? && shareAllm != \"0\" && shareAllm != \"0.00M\" && shareAllm != \"0.00\" ><#if shareInfo?? && shareInfo?index_of(telnum) != -1>共享他人流量${shareAllm}，<#else>被他人共享流量${shareAllm}</#if></#if> 以上国内资费不包含港澳台。如以上查询结果未包含您需要的信息，请说“短信接收”获取更多查询链接。";
 		//模版数据
 		HashMap<String, Object> paramMap = new HashMap<>();
 		paramMap.put("jwbUflow", "20M");
@@ -232,6 +256,8 @@ public class FreemarkerTest {
 		paramMap.put("provresRflow", "12M");
 		paramMap.put("cxRflow", "40M");
 		paramMap.put("cxxyRflow", "30M");
+		paramMap.put("shareAllm", "30M");
+		paramMap.put("shareInfo", "123456");
 		//模板转换的最终内容
 		String ttsContent;
 		try {
