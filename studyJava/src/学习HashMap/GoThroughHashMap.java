@@ -1,4 +1,4 @@
-package com.dhsu.hashmap;
+package 学习HashMap;
 
 import java.util.HashMap;
 import java.util.Iterator;

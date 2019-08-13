@@ -4,7 +4,7 @@ public class ThreadTest {
 	public static void main(String[] args) {
 		new ThreadTest().init();
 	}
-
+	
 	public void init() {
 		final Business business = new Business();
 		
