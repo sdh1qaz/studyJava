@@ -64,6 +64,25 @@ public class JsonObjectTest {
 				
 	}
 	
+	//json数组为空的情况
+	@Test
+	public void tes4() {
+		//json数据转化为字符串
+		String jStu = "{\r\n" + 
+				"	\"student\": {\r\n" + 
+				"		\"name\": \"张三\",\r\n" + 
+				"		\"age\": 20,\r\n" + 
+				"		\"score\": []\r\n" + 
+				"	}\r\n" + 
+				"}";
+		JSONObject stuObj = JSONObject.parseObject(jStu);
+		System.out.println(jStu);
+		JSONArray jsonArray = stuObj.getJSONObject("student").getJSONArray("score");
+		System.out.println(jsonArray.size());
+		System.out.println(jsonArray==null);
+		
+	}
+	
 	//getJsonObject 空指针异常
 	@Test
 	public void tes3() {
