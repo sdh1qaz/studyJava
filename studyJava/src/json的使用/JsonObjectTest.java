@@ -105,8 +105,9 @@ public class JsonObjectTest {
 				"}";
 		JSONObject stuObj = JSONObject.parseObject(jStu);
 		System.out.println(jStu);
-		JSONObject obj = stuObj.getJSONObject("student").getJSONObject("object");
-		System.out.println(!obj.containsKey("outData.list") || !obj.getJSONObject("outData.list").containsKey("data"));
+		JSONObject obj = stuObj.getJSONObject("student").getJSONObject("object").getJSONObject("outData");
+		System.out.println(obj == null);
+		//System.out.println(!obj.containsKey("outData.list") || !obj.getJSONObject("outData.list").containsKey("data"));
 		
 	}
 	

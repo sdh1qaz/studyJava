@@ -49,6 +49,7 @@ public class Calendar_DateTest {
 		String beginDate = new SimpleDateFormat("yyyy年MM月dd日").format(d);
 		System.out.println(beginDate);
 		System.out.println(date.compareTo(beginDate) > 0);
+		System.out.println("201911".compareTo("201911"));
 		
 	}
 	
