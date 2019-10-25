@@ -23,6 +23,64 @@ import com.google.gson.JsonObject;
 
 public class JsonObjectTest {
 	
+	/**
+	 * 测试用内部类接收多层json
+	 */
+	@Test
+	public void testInnerClass() {
+		String jStr = "{\r\n" + 
+				"	\"rtnCode\": \"0\",\r\n" + 
+				"	\"rtnMsg\": \"成功!\",\r\n" + 
+				"	\"bean\": {\r\n" + 
+				"\r\n" + 
+				"	},\r\n" + 
+				"	\"beans\": [\r\n" + 
+				"\r\n" + 
+				"	],\r\n" + 
+				"	\"object\": {\r\n" + 
+				"		\"message\": \"成功\",\r\n" + 
+				"		\"status\": \"0\",\r\n" + 
+				"		\"data\": {\r\n" + 
+				"			\"transIdo\": \"1504669165471\",\r\n" + 
+				"			\"oprTime\": \"20170906113925\",\r\n" + 
+				"			\"qryInfoRsp\": {\r\n" + 
+				"				\"sumBaseFee\": \"0\",\r\n" + 
+				"				\"sumFuncFee\": \"0\",\r\n" + 
+				"				\"sumPackageFee\": \"0\",\r\n" + 
+				"				\"feeList\": [{\r\n" + 
+				"						\"feeAmount\": \"100\",\r\n" + 
+				"						\"feeType\": \"1\",\r\n" + 
+				"						\"feeName\": \"\",\r\n" + 
+				"						\"date\": \"10250000\"\r\n" + 
+				"					},\r\n" + 
+				"					{\r\n" + 
+				"						\"feeAmount\": \"\",\r\n" + 
+				"						\"feeType\": \"1\",\r\n" + 
+				"						\"feeName\": \"\",\r\n" + 
+				"						\"date\": \"201909250000\"\r\n" + 
+				"					},\r\n" + 
+				"					{\r\n" + 
+				"						\"feeAmount\": \"\",\r\n" + 
+				"						\"feeType\": \"1\",\r\n" + 
+				"						\"feeName\": \"\",\r\n" + 
+				"						\"date\": \"201907250000\"\r\n" + 
+				"					},\r\n" + 
+				"					{\r\n" + 
+				"						\"feeAmount\": \"\",\r\n" + 
+				"						\"feeType\": \"1\",\r\n" + 
+				"						\"feeName\": \"\",\r\n" + 
+				"						\"date\": \"201907250000\"\r\n" + 
+				"					}\r\n" + 
+				"				]\r\n" + 
+				"			}\r\n" + 
+				"		}\r\n" + 
+				"	}\r\n" + 
+				"}";
+		
+		CSDHQVNMonthStartFee c = CsfJSonUtils.jsonString2Bean(jStr, "$.object", CSDHQVNMonthStartFee.class);
+		System.out.println(c.getData().getQryInfoRsp().isHasFeeRecordToday());		
+	}
+	
 	@Test
 	public void tes() {
 		double d = 0.00;
