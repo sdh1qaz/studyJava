@@ -31,11 +31,7 @@ public class CsfJSonUtils {
 	}
 
 	/**
-	 * @param <T>
-	 * 
-	 * @Title: jsonString2Bean @Description: 完成JSON串到JavaBean的转化 @param @param
-	 * jsonString @param @param jsonPath @param @param
-	 * clazz @param @return @param @throws Exception 参数 @return T<T> 返回类型 @throws
+	 * 完成JSON串到JavaBean的转化
 	 */
 	public static <T> T jsonString2Bean(String jsonString, String jsonPath, Class<T> clazz) {
 
@@ -55,6 +51,25 @@ public class CsfJSonUtils {
 		Gson gson = new Gson();
 
 		return gson.fromJson(json, clazz); // 解析
+	}
+	
+	/**
+	 * 测试jsonString2Bean方法
+	 */
+	public static void main(String[] args) {
+		String jStu = "{\r\n" + 
+				"    \"student\": {\r\n" + 
+				"        \"name\": \"张三\",\r\n" + 
+				"        \"age\": 20,\r\n" + 
+				"        \"score\": {\r\n" + 
+				"            \"语文\": \"90\",\r\n" + 
+				"            \"数学\": \"100\",\r\n" + 
+				"            \"英语\": \"80\"\r\n" + 
+				"        }\r\n" + 
+				"    }\r\n" + 
+				"}"; 
+		Student s = jsonString2Bean(jStu,"student",Student.class);
+		System.out.println(s.toString());
 	}
 
 	/*public static <T> List<T> jsonString2Beans(String jsonString, String jsonPath, Class<T> clazz) {
