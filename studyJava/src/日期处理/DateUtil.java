@@ -53,10 +53,23 @@ public class DateUtil {
 		return new SimpleDateFormat("yyyyMM").format(d);
 	}
 	
+	/**
+	 * 给定一个时间字符串yyyyMMdd，判断距离现在是否在3个月以内（含）
+	 */
+	public static boolean less3Mon(String date) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -3);
+		Date d = cal.getTime();
+		//距离现在3月之前那一刻的年月日字符串
+		String dStr = new SimpleDateFormat("yyyyMMdd").format(d);
+		return date.compareTo(dStr) > 0;
+	}
+	
 	@Test
 	public void test() {
 		System.out.println(getNowYM());
 		System.out.println(getLastYM());
+		System.out.println(less3Mon("20190125"));
 	}
 
 }
