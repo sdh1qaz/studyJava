@@ -1,4 +1,4 @@
-package com.dhsu.jdbc;
+package jdbc使用;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;

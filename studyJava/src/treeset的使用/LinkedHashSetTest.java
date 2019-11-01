@@ -1,4 +1,4 @@
-package com.dhsu.treeset;
+package treeset的使用;
 /**
  * @ClassName： LinkedHashSetTest
  * @Author: dhSu
