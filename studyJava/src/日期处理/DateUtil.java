@@ -36,12 +36,56 @@ public class DateUtil {
 	}
 	
 	/**
-	 * 获取当前系统年月（yyyyMMdd）
+	 * 获取前天系统年月日（yyyyMMdd）
+	 */
+	public static String getYestYMD() {
+		//当前系统年月日（yyyyMMdd）
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, -1);
+		Date date = cal.getTime();
+		return new SimpleDateFormat("yyyyMMdd").format(date);
+	}
+	
+	/**
+	 * 获取6天前当天系统年月日（yyyyMMdd）
+	 */
+	public static String get6DaysBefYMD() {
+		//当前系统年月日（yyyyMMdd）
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, -6);
+		Date date = cal.getTime();
+		return new SimpleDateFormat("yyyyMMdd").format(date);
+	}
+	
+	/**
+	 * 获取半年前的系统年月日
+	 */
+	public static String getHalfYMD() {
+		//当前系统年月日（yyyyMMdd）
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -6);
+		Date date = cal.getTime();
+		return new SimpleDateFormat("yyyyMMdd").format(date);
+	}
+	
+	
+	/**
+	 * 获取当前系统年月（yyyyMM）
 	 */
 	public static String getNowYM() {
 		//当前系统年月（yyyyMM）
 		return new SimpleDateFormat("yyyyMM").format(new Date());
 	}
+	
+	/**
+	 * 获取当前系统年月（2019-10-20 03:56:19）
+	 */
+	public static String getNowDate() {
+		//当前系统年月（yyyyMM）
+		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+	
+	
 	
 	/**
 	 * 获取上月年月yyyyMM
@@ -67,9 +111,13 @@ public class DateUtil {
 	
 	@Test
 	public void test() {
-		System.out.println(getNowYM());
+		/*System.out.println(getNowYM());
 		System.out.println(getLastYM());
 		System.out.println(less3Mon("20190125"));
+		System.out.println(getYestYMD());*/
+		//System.out.println("20191031 10:40".compareTo("20191031 10:31"));
+		System.out.println(get6DaysBefYMD());
+		System.out.println(getNowDate());
 	}
 
 }

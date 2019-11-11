@@ -1,0 +1,1 @@
+经查询，您本机办理宽带所在位置出现宽带网络故障，影响宽带正常使用，现工作人员正在积极抢修，预计${restoreTime?substring(0,4)}年[n2]${restoreTime?substring(4,6)}月${restoreTime?substring(6,8)}日${restoreTime?substring(8,10)}时恢复正常，请您耐心等待，给您带来不便敬请谅解。

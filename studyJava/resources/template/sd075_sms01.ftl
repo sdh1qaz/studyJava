@@ -1,0 +1,1 @@
+【充值记录查询】尊敬的客户，您好！您于<#list payRecRsp as p>${p.payDate?substring(0,4)}年[n2]${p.payDate?substring(4,6)}月${p.payDate?substring(6,8)}日${p.payDate?substring(8,10)}时${p.payDate?substring(10,12)}分充值${p.amount}元<#if p_has_next>，<#else>。</#if></#list>如果您通过微信或支付宝等方式充值，可能存在充值到账延迟的情况，建议您关注第三方充值进度并耐心等待。也可编辑短信262*两位月份发送到10086查询缴费记录。【中国移动】

@@ -1,0 +1,1 @@
+协议消费差额是指您本机未达到协议消费而补收的费用，您${date?substring(0,4)}年${date?substring(4,6)}月未达到协议消费补收${cr.bsFee}元。
