@@ -7,6 +7,35 @@
 代收费一般是您点播或定制梦网业务产生的费用，您${date?substring(0,4)}年[n2]${date?substring(4,6)}月没有产生代收费。
 
 
+您现在的放心用流量使用达到${bxSum}G会降速。
+
+
+
+套餐外短彩信费一般是您发送短信或彩信产生的费用，您${date?substring(0,4)}年[n2]${date?substring(4,6)}月没有产生套餐外短彩信费。
+（8月29日优化）
+
+
+模板如下，请根据用户实际产生的费用进行播报 ，未产生则不播报。
+套餐外短彩信费一般是您发送短信或彩信产生的费用，查询您${date?substring(0,4)}年[n2]${date?substring(4,6)}月产生了<#if tcwdxFee??>短信费${tcwdxFee?number/100}元，</#if><#if tcwcxFee??>彩信费${tcwcxFee?number/100}元，</#if>
+短信费**元，彩信费**元。
+（9月4日优化）
+
+【套餐外短彩信费查询】尊敬的客户，您好！套餐外短彩信费一般是您发送短信或彩信产生的费用，查询您${date?substring(0,4)}年[n2]${date?substring(4,6)}月产生了套餐外短彩信费${tcwdcxFee?number/100}元，其中：<#if tcwdxFee??>短信费${tcwdxFee?number/100}元，</#if><#if tcwcxFee??>彩信费${tcwcxFee?number/100}元。</#if>【中国移动】
+
+欠费的情况：
+sd103_tts01
+预付费：您的手机已停机，截至目前欠费${cb.result.realFeeQryRsp.balance?number?abs}元，充值开机后即可办理业务
+sd103_tts03
+后付费：您的手机已停机，截至目前您话费欠费${cb.result.realFeeQryRsp.availableBalance?number?abs}元，往月未缴话费${cb.result.realFeeQryRsp.hisBillFee?number?abs}元，充值开机后即可办理业务
+未欠费情况：
+sd103_tts02
+预付费：现存在缴费开机不及时的情况，查询您目前话费余额${cb.result.realFeeQryRsp.balance?number?abs}元，如手机无法正常使用请将手机重新关开机测试，若仍未恢复，可稍等几分钟后再试
+sd103_tts04
+后付费：现存在缴费开机不及时的情况，查询您目前话费余额${cb.result.realFeeQryRsp.availableBalance?number?abs}元，往月未缴话费${cb.result.realFeeQryRsp.hisBillFee?number?abs}元，如手机无法正常使用请将手机重新关开机测试，若仍未恢复，可稍等几分钟后再试
+
+
+
+
 经查询，您本机办理宽带所在位置出现网络故障，影响电视正常观看，现工作人员正在积极抢修，预计${restoreTime?substring(0,4)}年[n2]${restoreTime?substring(4,6)}月${restoreTime?substring(6,8)}日${restoreTime?substring(8,10)}恢复正常，请您耐心等待，给您带来不便敬请谅解。
 
 

@@ -100,7 +100,7 @@ public class FreemarkerDemo {
 	@Test
 	public void test1() throws Exception {
 		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		paramsMap.put("cr", "25098");
+		paramsMap.put("cr", "-23.45");
 		System.out.println(getTtsSmsStr("test1.ftl", paramsMap));
 	}
 }
