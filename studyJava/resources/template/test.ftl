@@ -389,3 +389,100 @@ sd006_sms01
 套餐余量详情请点击安全链接：https://wx.online-cmcc.cn/website/personalHome/new/index 【中国移动】
 
 
+
+sd007_tts01
+您当前国内通用流量**，已用**，剩余**；其他流量**，已用**，剩余**。
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+<#if gntyAll gt 0>您当前国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}G<#else>${gntyAll?string('#.##')}M</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}G<#else>${(gntyAll-gntyLeft)?string('#.##')}M</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}G<#else>${gntyLeft?string('#.##')}M</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
+
+
+sd007_tts02
+您本机放心用流量已用**，使用达到**G会降速，降速后可继续使用，不额外收费；**流量**，已用**，剩余**，**流量**，已用**，剩余**，……。
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+<#if fxyJs gt 0>您本机放心用流量已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}G<#else>${fxyUsed?string('#.##')}M</#if>，使用达到${(fxyJs/1024)?string('#.##')}G会降速，降速后可继续使用，不额外收费；</#if>
+<#if gntyAll gt 0>国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}G<#else>${gntyAll?string('#.##')}M</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}G<#else>${(gntyAll-gntyLeft)?string('#.##')}M</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}G<#else>${gntyLeft?string('#.##')}M</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
+
+
+sd007_tts03
+您本机放心用流量使用达到**G会降速，已用**，系统已自动降速；**流量**，已用**，剩余**，**流量**，已用**，剩余**，……。
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+<#if fxyJs gt 0>您本机放心用流量使用达到${(fxyJs/1024)?string('#.##')}G会降速，已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}G<#else>${fxyUsed?string('#.##')}M</#if>，系统已自动降速；</#if>
+<#if gntyAll gt 0>国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}G<#else>${gntyAll?string('#.##')}M</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}G<#else>${(gntyAll-gntyLeft)?string('#.##')}M</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}G<#else>${gntyLeft?string('#.##')}M</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
+
+
+
+sd007_sms01
+以下为举例说明，请根据客户实际的情况下发短信，若剩余流量为0则无需以小数点展示，且小数点后两位如均为0则展示，不为0则保留小数点两位数即可。（“不限量”修改为”放心用“优先，顺序1为不限量套餐，若无不限量则顺序2提前）若用户不是不限量则不限量的内容不下发。
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#assign gntyjzAll=0>
+<#assign gntyjzLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number>
+<#if c.privSet?index_of("结转")!=-1><#assign gntyjzAll+=c.sumNum?number><#assign gntyjzLeft+=c.leftNum?number></#if>
+</#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+<#assign n1=0>
+【流量剩余信息】尊敬的客户，您好！截至${.now?string["MM月dd日HH时"]}
+<#if fxyJs gt 0>放心用流量已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}GB<#else>${fxyUsed?string('#.##')}MB</#if>，使用达到${(fxyJs/1024)?string('#.##')}GB会降速，降速后可继续使用，不额外收费；</#if>
+<#if gntyAll gt 0>国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}GB<#else>${gntyAll?string('#.##')}MB</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}GB<#else>${(gntyAll-gntyLeft)?string('#.##')}MB</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}GB<#else>${gntyLeft?string('#.##')}MB</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}GB<#else>${qtAll?string('#.##')}MB</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}GB<#else>${(qtAll-qtLeft)?string('#.##')}MB</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}MB</#if>。</#if>
+以下是具体明细：\r\n
+<#if fxyJs gt 0><#assign n1=n1+1>（${n1}）放心用流量，目前已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}GB<#else>${fxyUsed?string('#.##')}MB</#if>，使用达到${(fxyJs/1024)?string('#.##')}G会降速；\r\n</#if>
+<#if gntyAll gt 0><#assign n1=n1+1>（${n1}）国内通用流量，本月共<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}GB<#else>${gntyAll?string('#.##')}MB</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}GB<#else>${(gntyAll-gntyLeft)?string('#.##')}MB</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}GB<#else>${gntyLeft?string('#.##')}MB</#if><#if gntyjzAll gt 0>，上月结转流量<#if gntyjzAll gt 1024>${(gntyjzAll/1024)?string('#.##')}GB<#else>${gntyjzAll?string('#.##')}MB</#if>，剩余<#if gntyjzLeft gt 1024>${(gntyjzLeft/1024)?string('#.##')}GB<#else>${gntyjzLeft?string('#.##')}MB</#if></#if>；\r\n</#if>
+<#list cp as c>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign n1=n1+1>（${n1}）${c.privSet}，本月共<#if c.sumNum?number gt 1024>${(c.sumNum?number/1024)?string('#.##')}GB<#else>${(c.sumNum?number)?string('#.##')}MB</#if>，已用<#if c.sumNum?number - c.leftNum?number gt 1024>${((c.sumNum?number - c.leftNum?number)/1024)?string('#.##')}GB<#else>${(c.sumNum?number - c.leftNum?number)?string('#.##')}MB</#if>，剩余<#if c.leftNum?number gt 1024>${(c.leftNum?number/1024)?string('#.##')}GB<#else>${(c.leftNum?number)?string('#.##')}MB</#if>；\r\n</#if>
+</#list>
+流量余量详情可点击安全链接：https://wx.online-cmcc.cn/website/personalHome/new/index 查看。 【中国移动】
+
+
+
+
+【流量剩余信息】尊敬的客户，您好！截至*月*日*时***流量已用**，达到**GB后会降速，降速后可继续使用，不额外收费；**流量**，已用**，剩余**，**流量**MB，已用**MB，剩余**MB，……。
+（1）**，目前已用**，使用达到**GB会降速；（若接口没变的情况下，将名称中的“不限量”修改为“放心用”）
+（2）**，本月共**MB，已用**MB，剩余**MB，
+上月结转流量**MB，剩余**MB；（结转流量有则体现，没有则忽略）
+（3）**，本月共**MB，已用**MB，剩余**MB，
+上月结转流量**MB，剩余**MB；（结转流量有则体现，没有则忽略）
+（4）…………。
+流量余量详情可点击安全链接：https://wx.online-cmcc.cn/website/personalHome/new/index 查看。 【中国移动】
+
+
+
+
