@@ -4,7 +4,7 @@ import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.junit.Test;
 
-import com.dhsu.jdbc.读取数据库转换为sql.OperateDataBySql;
+import jdbc.读取数据库转换为sql.OperateDataBySql;
 
 /**
  * java操作qq邮箱收发邮件
