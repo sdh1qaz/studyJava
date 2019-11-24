@@ -485,4 +485,180 @@ sd007_sms01
 
 
 
+sd152_tts01
+模板：
+经查询，您上个月话费剩余**元（如余额为负则播报：您上个月欠费**元，余额为0时播报：您上个月话费剩余0），这个月交了**元，另外给您返还了**元，这些费用加起来是**元，月初出账期扣了**元，现在余额是**元（如余额为负数时：现在欠费**元，余额为0时：现在余额是0），话费减少主要是月初扣费导致。
+
+sd152_tts01
+经查询，您上个月
+<#if prevBalance lt 0>欠费<#else>话费剩余</#if>${(prevBalance/100)?string('#.##')}元，这个月交了${(chargeCur/100)?string('#.##')}元，
+另外给您返还了${(returnUsed/100)?string('#.##')}元，这些费用加起来是${((prevBalance+chargeCur+returnUsed)/100)?string('#.##')}元，月初出账期扣了${(feeCur/100)?string('#.##')}元，现在
+<#if curBalance lt 0>欠费<#else>余额</#if>是${(curBalance/100)?string('#.##')}元，话费减少主要是月初扣费导致。
+
+模板：
+sd152_tts02
+经查询，您上个月未达到协议消费补收了${bsFee?number?string('#.##')}元，补收后话费
+<#if prevBalance lt 0>欠费<#else>剩余</#if>${(prevBalance/100)?string('#.##')}元，这个月交了${(chargeCur/100)?string('#.##')}元，
+另外给您返还了${(returnUsed/100)?string('#.##')}元，这些费用加起来是${((prevBalance+chargeCur+returnUsed)/100)?string('#.##')}元，月初出账期扣了${(feeCur/100)?string('#.##')}元，现在
+<#if curBalance lt 0>欠费<#else>余额</#if>是${(curBalance/100)?string('#.##')}元，话费减少主要是月初扣费导致。
+
+
+
+
+
+
+
+1、根据接口调取的时间数值下发，如某项无记录，则不下发，同时序号减少即可；
+2、月份为用户来电月份-1；
+sd152_sms01：
+【账单信息】尊敬的客户，您好！以下是您的话费详情：\r\n
+1、${lmonth}月末<#if prevBalance lt 0>欠费<#else>话费剩余</#if>${(prevBalance/100)?string('#.##')}元；\r\n
+2、本月交费${(chargeCur/100)?string('#.##')}元；\r\n
+3、返还话费${(returnUsed/100)?string('#.##')}元（包含减免预交，即协议款+减免预交）；\r\n
+4、月初扣费${(feeCur/100)?string('#.##')}元；\r\n
+即：${lmonth}月末<#if prevBalance lt 0>欠费<#else>话费剩余</#if>${(prevBalance/100)?string('#.##')}元+交费${(chargeCur/100)?string('#.##')}元+返还话费${(returnUsed/100)?string('#.##')}元-月初扣费${(feeCur/100)?string('#.##')}元=<#if curBalance lt 0>截至目前已欠费<#else>当前话费余额</#if>${(curBalance/100)?string('#.##')}元（如余额为负数则下发：截至目前已欠费**元），
+话费减少主要是月初扣费导致，您也可关注“中国移动微信公众号”查询各项费用扣费明细。【中国移动】
+
+
+
+sd152_sms02：
+【账单信息】尊敬的客户，您好！以下是您的话费详情：\r\n
+1、${lmonth}月未达到协议消费补收${bsFee?number?string('#.##')}元，补收后月末话费<#if prevBalance lt 0>欠费<#else>剩余</#if>${(prevBalance/100)?string('#.##')}元；\r\n
+2、本月交费${(chargeCur/100)?string('#.##')}元；\r\n
+3、返还话费${(returnUsed/100)?string('#.##')}元（包含减免预交，即协议款+减免预交）；\r\n
+4、月初扣费${(feeCur/100)?string('#.##')}元；\r\n
+即：补收后月末<#if prevBalance lt 0>欠费<#else>话费</#if>${(prevBalance/100)?string('#.##')}元+交费${(chargeCur/100)?string('#.##')}元+返还话费${(returnUsed/100)?string('#.##')}元-月初扣费${(feeCur/100)?string('#.##')}元=<#if curBalance lt 0>截至目前已欠费<#else>当前话费余额</#if>${(curBalance/100)?string('#.##')}元（如余额为负数则下发：截至目前已欠费**元），
+话费减少主要是月初扣费和协议费用补收导致，您也可关注“中国移动微信公众号”查询各项费用扣费明细。【中国移动】
+
+
+
+
+以下扣费根据客户实际账单信息进行播报，若账单细类合计费用为0则不播报。
+当月1号账期1-7号来电播报：
+sd05401_tts01_1
+月初1到7号会扣除您的套餐费，现查询您账单扣费${crN.totalFee?replace('.00','')}元，其中
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+无其他额外扣费，请放心。
+
+sd05401_tts01_2
+现查询您${.now?string["YYYY年MM月"]}账期扣费${crN.totalFee?replace('.00','')}元，其中
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+无其他额外扣费，请放心。
+
+
+以下扣费根据客户实际账单信息进行播报，若账单细类合计费用为0则不播报。
+sd05401_tts02_1
+当月1号账期1-7号来电播报：月初1到7号会一次性扣除您的套餐费，现查询您账单扣费${crN.totalFee?replace('.00','')}元，其中
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.tcwyyFee?? && crN.tcwyyFee != '0.00'>套餐外语音通信费${crN.tcwyyFee?replace('.00','')}元，</#if>
+<#if crN.tcwswFee?? && crN.tcwswFee != '0.00'>套餐外上网费${crN.tcwswFee?replace('.00','')}元，</#if>
+<#if crN.tcwdcxFee?? && crN.tcwdcxFee != '0.00'>套餐外短彩信费${crN.tcwdcxFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.dsFee?? && crN.dsFee != '0.00'>代收费${crN.dsFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+
+
+sd05401_tts02_2
+现查询您${.now?string["YYYY年MM月"]}账期扣费${crN.totalFee?replace('.00','')}元，其中
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.tcwyyFee?? && crN.tcwyyFee != '0.00'>套餐外语音通信费${crN.tcwyyFee?replace('.00','')}元，</#if>
+<#if crN.tcwswFee?? && crN.tcwswFee != '0.00'>套餐外上网费${crN.tcwswFee?replace('.00','')}元，</#if>
+<#if crN.tcwdcxFee?? && crN.tcwdcxFee != '0.00'>套餐外短彩信费${crN.tcwdcxFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.dsFee?? && crN.dsFee != '0.00'>代收费${crN.dsFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+
+
+
+以下扣费根据客户实际账单信息进行下发，若账单细类合计费用为0则不下发。
+有套餐外费用或代收费或协议消费差额短信模板：
+sd05401_sms01
+【账单信息】尊敬的客户，您好！您${.now?string["YYYY年MM月"]}账期
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.tcwyyFee?? && crN.tcwyyFee != '0.00'>套餐外语音通信费${crN.tcwyyFee?replace('.00','')}元，</#if>
+<#if crN.tcwswFee?? && crN.tcwswFee != '0.00'>套餐外上网费${crN.tcwswFee?replace('.00','')}元，</#if>
+<#if crN.tcwdcxFee?? && crN.tcwdcxFee != '0.00'>套餐外短彩信费${crN.tcwdcxFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.dsFee?? && crN.dsFee != '0.00'>代收费${crN.dsFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+账单合计扣费${crN.totalFee?replace('.00','')}元，当前<#if curBalance lt 0>欠费<#else>余额</#if>${(curBalance?abs/100)?string('#.##')}元。您可编辑短信25到10086查询各项费用扣费明细。【中国移动】
+
+
+
+无套餐外费用或代收费模板：
+sd05401_sms02
+【账单信息】尊敬的客户，您好！您${.now?string["YYYY年MM月"]}账期
+<#if crN.packageFee?? && crN.packageFee != '0.00'>套餐及固定费${crN.packageFee?replace('.00','')}元，</#if>
+<#if crN.zzywFee?? && crN.zzywFee != '0.00'>增值业务费${crN.zzywFee?replace('.00','')}元，</#if>
+<#if crN.bsFee?? && crN.bsFee != '0.00'>协议消费差额${crN.bsFee?replace('.00','')}元，</#if>
+<#if crN.priviageFee?? && crN.priviageFee != '0.00'>优惠费${crN.priviageFee?replace('.00','')}元，</#if>
+账单合计扣费${crN.totalFee?replace('.00','')}元，当前<#if curBalance lt 0>欠费<#else>余额</#if>${(curBalance?abs/100)?string('#.##')}元。您可编辑短信25到10086查询各项费用扣费明细。【中国移动】
+
+
+
+
+sd029_tts03
+套餐外上网费一般是超出流量或使用了不在套餐范围内的流量产生的费用，您${cr.cycleStart?substring(5,7)}月${cr.cycleStart?substring(8,10)}日至目前产生${cr.tcwswFee?replace('.00','')}元套餐外上网费，您本机每月${cr.cycleStart?substring(8,10)}号更新流量包月，如果手机看视频、下载软件或后台自动更新则流量使用较快，建议您关闭手机数据开关或者开通流量包月节省上网费用。
+
+
+sd029_tts01
+套餐外上网费一般是超出流量或使用了不在套餐范围内的流量产生的费用查询您${cr.cycleStart?substring(5,7)}月${cr.cycleStart?substring(8,10)}日至目前产生${cr.tcwswFee?replace('.00','')}元套餐外上网费，如果手机看视频、下载软件或后台自动更新则流量使用较快，建议您关闭手机数据开关或者开通流量包月节省上网费用。
+
+
+sd029_tts02
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+经查询：您本机每月${cr.cycleStart?substring(8,10)}号更新流量包月，${cr.cycleStart?substring(5,7)}月${cr.cycleStart?substring(8,10)}日至目前
+<#if fxyJs gt 0>放心用流量已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}G<#else>${fxyUsed?string('#.##')}M</#if>，达到${(fxyJs/1024)?string('#.##')}G会降速，降速后可继续使用，不额外收费；</#if>
+<#if gntyAll gt 0>国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}G<#else>${gntyAll?string('#.##')}M</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}G<#else>${(gntyAll-gntyLeft)?string('#.##')}M</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}G<#else>${gntyLeft?string('#.##')}M</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
+
+
+
+第一种情况：产生套餐外上网费
+sd029_sms01
+【套餐外上网费查询】尊敬的客户，您好！查询您本机截至${.now?string["MM月dd日HH时"]}，产生套餐外上网费${cr.tcwswFee?replace('.00','')}元，您可登陆山东移动网站查询上网详单。
+温馨提示：建议您关闭手机数据开关或者开通流量包月节省上网费用，您可通过点击安全链接：http://dx.10086.cn/Tf2uMJ3 开通流量加油包。【中国移动】
+
+
+
+第二种情况：未产生套餐外上网费（说明：模板中标红色字体若用户不是不限量则不下发，“不限量”修改为“放心用”。）
+sd029_sms02
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+【流量剩余信息】尊敬的客户，您好！查询您本机截至${.now?string["MM月dd日HH时"]}，暂未产生套餐外上网费，流量剩余情况如下：
+<#if fxyJs gt 0>放心用流量已用<#if fxyUsed gt 1024>${(fxyUsed/1024)?string('#.##')}G<#else>${fxyUsed?string('#.##')}M</#if>，达到${(fxyJs/1024)?string('#.##')}G会降速，降速后可继续使用，不额外收费；</#if>
+<#if gntyAll gt 0>国内通用流量<#if gntyAll gt 1024>${(gntyAll/1024)?string('#.##')}G<#else>${gntyAll?string('#.##')}M</#if>，已用<#if gntyAll-gntyLeft gt 1024>${((gntyAll-gntyLeft)/1024)?string('#.##')}G<#else>${(gntyAll-gntyLeft)?string('#.##')}M</#if>，剩余<#if gntyLeft gt 1024>${(gntyLeft/1024)?string('#.##')}G<#else>${gntyLeft?string('#.##')}M</#if>；</#if>
+<#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
+【中国移动】
+
+
+
 

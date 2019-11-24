@@ -101,11 +101,19 @@ public class FreemarkerDemo {
 	public void test1() throws Exception {
 		Map<String, Object> paramsMap = new HashMap<String, Object>();
 		paramsMap.put("cr", "-23.45");
+		paramsMap.put("cycleStart", "2019-07-24");
 		paramsMap.put("total", "25.00");
 		paramsMap.put("leftNum", "20.00");
+		paramsMap.put("prevBalance", -1000);
+		paramsMap.put("chargeCur", 1000);
+		paramsMap.put("returnUsed", 500);
+		paramsMap.put("feeCur", 500);
+		paramsMap.put("curBalance", 2000);
+		paramsMap.put("bsFee", "35.68");
+		paramsMap.put("lmonth", "10");
 		System.out.println(getTtsSmsStr("test1.ftl", paramsMap));
-		System.out.println(0.00 > 0);
+		/*System.out.println(0.00 > 0);
 		System.out.println(5.00+8);
-		System.out.println(Double.valueOf("1000"));
+		System.out.println(Double.valueOf("1000"));*/
 	}
 }
