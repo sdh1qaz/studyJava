@@ -1,5 +1,7 @@
 import java.awt.print.Printable;
 
+import org.junit.Test;
+
 /**
  * @ClassName： TabTest
  * @Author: dhSu
@@ -15,4 +17,14 @@ public class TabTest {
 		System.out.print("2017008\t黄盖\t77\t82\t100\n");
 	}
 
+	@Test
+	public void test() {
+		String a,b,c = "";
+		a="A";
+		b="B";
+		c="C";
+		System.out.println(a);
+		System.out.println(b);
+		System.out.println(c);
+	}
 }

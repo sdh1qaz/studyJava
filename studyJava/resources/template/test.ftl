@@ -659,6 +659,32 @@ sd029_sms02
 <#if qtAll gt 0>其他流量<#if qtAll gt 1024>${(qtAll/1024)?string('#.##')}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gt 1024>${(qtAll-qtLeft)/1024?string('#.##')}G<#else>${(qtAll-qtLeft)?string('#.##')}M</#if>，剩余<#if qtLeft gt 1024>${(qtLeft/1024)?string('#.##')}G<#else>${qtLeft?string('#.##')}M</#if>。</#if>
 【中国移动】
 
+<#assign fxyUsed=0>
+<#assign fxyJs=0>
+<#assign gntyAll=0>
+<#assign gntyLeft=0>
+<#assign qtAll=0>
+<#assign qtLeft=0>
+<#list cp as c>
+<#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
+<#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
+</#list>
+<#if fxyJs gt 0>您本机放心用流量使用达到${(fxyJs/1024)?string("#.##")}G会降速，已用<#if fxyUsed gte 1024>${(fxyUsed/1024)?string("#.##")}G<#else>${fxyUsed?string("#.##")}M</#if>，系统已自动降速；</#if> <#if gntyAll gt 0>国内通用流量<#if gntyAll gte 1024>${(gntyAll/1024)?string("#.##")}G<#else>${gntyAll?string("#.##")}M</#if>，已用<#if gntyAll-gntyLeft gte 1024>${((gntyAll-gntyLeft)/1024)?string("#.##")}G<#else>${(gntyAll-gntyLeft)?string("#.##")}M</#if>，剩余<#if gntyLeft gte 1024>${(gntyLeft/1024)?string("#.##")}G<#else>${gntyLeft?string("#.##")}M</#if>；</#if> <#if qtAll gt 0>其他流量<#if qtAll gte 1024>${(qtAll/1024)?string("#.##")}G<#else>${qtAll}M</#if>，已用<#if qtAll-qtLeft gte 1024>${((qtAll-qtLeft)/1024)?string("#.##")}G<#else>${(qtAll-qtLeft)?string("#.##")}M</#if>，剩余<#if qtLeft gte 1024>${(qtLeft/1024)?string("#.##")}G<#else>${qtLeft?string("#.##")}M</#if>。</#if>
+
+
+
+
+sd039_tts01
+套餐外短彩信费一般是您发送短信或彩信产生的费用，查询您${date?substring(0,4)}年[n2]${date?substring(4,6)}月产生了
+<#list dcl as d>${d.billItemName}${(d.fee/100)?string("#.##")}元<#if d_has_next>，<#else>。</#if></#list>
+
+
+
+sd039_sms01
+【套餐外短彩信费查询】尊敬的客户，您好！套餐外短彩信费一般是您发送短信或彩信产生的费用，查询您${date?substring(0,4)}年${date?substring(4,6)}月产生了套餐外短彩信费${tcwdcxFee?number/100}元，其中：
+<#list dcl as d>${d.billItemName}${(d.fee/100)?string("#.##")}元<#if d_has_next>，<#else>。</#if></#list>
+【中国移动】
 
 
 
