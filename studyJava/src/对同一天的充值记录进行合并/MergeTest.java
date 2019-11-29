@@ -85,17 +85,17 @@ public class MergeTest {
 	public void test() {
 		List<BillInfo> bfs = new ArrayList<>();
 		bfs.add(new BillInfo("1", "10000"));
-		bfs.add(new BillInfo("3", "20000"));
-		bfs.add(new BillInfo("4", "20000"));
-		bfs.add(new BillInfo("4", "20000"));
-		bfs.add(new BillInfo("3", "20000"));
+		bfs.add(new BillInfo("1", "20000"));
+		bfs.add(new BillInfo("1", "20000"));
+		bfs.add(new BillInfo("1", "20000"));
+		bfs.add(new BillInfo("1", "20000"));
 		bfs.add(new BillInfo("1", "10000"));
 		bfs.add(new BillInfo("1", "10000"));
-		bfs.add(new BillInfo("2", "10000"));
+		bfs.add(new BillInfo("1", "10000"));
 		bfs.add(new BillInfo("1", "10000"));
 		bfs.add(new BillInfo("1", "30000"));
 		bfs.add(new BillInfo("1", "30000"));
-		bfs.add(new BillInfo("4", "30000"));
+		bfs.add(new BillInfo("1", "30000"));
 		bfs.add(new BillInfo("1", "30000"));
 		bfs.add(new BillInfo("1", "30000"));
 		
