@@ -794,3 +794,23 @@ hb_292_08
 
 
 
+
+hb_00202_sms01
+【账单查询】尊敬的客户，您好！您${qbd.bean.beginDate?substring(4,6)}月账单合计费用${qbd.bean.totalFee}元。其中
+<#list qbd.beans as b>
+<#if b.col2=="package_fixed_fee" && b.col4 != "0.00">套餐及固定费用${b.col4}元，</#if>
+<#if b.col2=="callserv_fee" && b.col4 != "0.00">套餐外语音通信费${b.col4}元，</#if>
+<#if b.col2=="net_fee" && b.col4 != "0.00">套餐外上网费${b.col4}元，</#if>
+<#if b.col2=="sms_mms_fee" && b.col4 != "0.00">套餐外短彩信费${b.col4}元，</#if>
+<#if b.col2=="self_addvalue_fee" && b.col4 != "0.00">自有增值业务费${b.col4}元，</#if>
+<#if b.col2=="daishou_fee" && b.col4 != "0.00">代收费业务费用${b.col4}元，</#if>
+<#if b.col2=="other_fee" && b.col4 != "0.00">其他费用XX元，</#if>
+<#if b.col2=="BILL_REPPAY" && b.col4 != "0.00">代他人付XX元，</#if>
+</#list>
+【中国移动】
+
+
+hb_00202_tts
+您[n2]${qbd.bean.beginDate?substring(4,6)}月月账单合计费用${qbd.bean.totalFee}元，消费明细已通过短信发送给您。
+
+
