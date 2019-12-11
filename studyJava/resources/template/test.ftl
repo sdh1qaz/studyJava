@@ -699,21 +699,98 @@ sd039_sms01
 <#assign gntyjzLeft=0>
 <#list cp as c>
 <#if c.bizType=="不限流量"><#assign fxyJs=c.sumNum?number><#assign fxyUsed=c.sumNum?number-c.leftNum?number></#if>
-<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number>
-<#if c.privSet?index_of("结转")!=-1><#assign gntyjzAll+=c.sumNum?number><#assign gntyjzLeft+=c.leftNum?number></#if>
-</#if>
+<#if c.bizType=="国内通用流量"><#assign gntyAll+=c.sumNum?number><#assign gntyLeft+=c.leftNum?number></#if>
 <#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign qtAll+=c.sumNum?number><#assign qtLeft+=c.leftNum?number></#if>
 </#list>
 <#assign n1=0>
 【流量剩余信息】尊敬的客户，您好！截至${.now?string["MM月dd日HH时"]} <#if fxyJs gt 0>放心用流量已用<#if fxyUsed gte 1024>${(fxyUsed/1024)?string("#.##")}GB<#else>${fxyUsed?string("#.##")}MB</#if>，使用达到${(fxyJs/1024)?string("#.##")}GB会降速，降速后可继续使用，不额外收费；</#if> <#if gntyAll gt 0>国内通用流量<#if gntyAll gte 1024>${(gntyAll/1024)?string("#.##")}GB<#else>${gntyAll?string("#.##")}MB</#if>，已用<#if gntyAll-gntyLeft gte 1024>${((gntyAll-gntyLeft)/1024)?string("#.##")}GB<#else>${(gntyAll-gntyLeft)?string("#.##")}MB</#if>，剩余<#if gntyLeft gte 1024>${(gntyLeft/1024)?string("#.##")}GB<#else>${gntyLeft?string("#.##")}MB</#if>；</#if> <#if qtAll gt 0>其他流量<#if qtAll gte 1024>${(qtAll/1024)?string("#.##")}GB<#else>${qtAll?string("#.##")}MB</#if>，已用<#if qtAll-qtLeft gte 1024>${((qtAll-qtLeft)/1024)?string("#.##")}GB<#else>${(qtAll-qtLeft)?string("#.##")}MB</#if>，剩余<#if qtLeft gte 1024>${(qtLeft/1024)?string("#.##")}G<#else>${qtLeft?string("#.##")}MB</#if>。</#if> 以下是具体明细：\r\n 
 <#if fxyJs gt 0><#assign n1=n1+1>（${n1}）放心用流量，目前已用<#if fxyUsed gte 1024>${(fxyUsed/1024)?string("#.##")}GB<#else>${fxyUsed?string("#.##")}MB</#if>，使用达到${(fxyJs/1024)?string("#.##")}G会降速；\r\n</#if> 
-<#if gntyAll gt 0><#assign n1=n1+1>（${n1}）国内通用流量，本月共<#if gntyAll gte 1024>${(gntyAll/1024)?string("#.##")}GB<#else>${gntyAll?string("#.##")}MB</#if>，已用<#if gntyAll-gntyLeft gte 1024>${((gntyAll-gntyLeft)/1024)?string("#.##")}GB<#else>${(gntyAll-gntyLeft)?string("#.##")}MB</#if>，剩余<#if gntyLeft gte 1024>${(gntyLeft/1024)?string("#.##")}GB<#else>${gntyLeft?string("#.##")}MB</#if><#if gntyjzAll gt 0>，上月结转流量<#if gntyjzAll gte 1024>${(gntyjzAll/1024)?string("#.##")}GB<#else>${gntyjzAll?string("#.##")}MB</#if>，剩余<#if gntyjzLeft gte 1024>${(gntyjzLeft/1024)?string("#.##")}GB<#else>${gntyjzLeft?string("#.##")}MB</#if></#if>；\r\n</#if> <#list cp as c> <#if c.bizType!="不限流量" && c.bizType!="国内通用流量"><#assign n1=n1+1>（${n1}）${c.privSet}，本月共<#if c.sumNum?number gte 1024>${(c.sumNum?number/1024)?string("#.##")}GB<#else>${(c.sumNum?number)?string("#.##")}MB</#if>，已用<#if c.sumNum?number - c.leftNum?number gte 1024>${((c.sumNum?number - c.leftNum?number)/1024)?string("#.##")}GB<#else>${(c.sumNum?number - c.leftNum?number)?string("#.##")}MB</#if>，剩余<#if c.leftNum?number gte 1024>${(c.leftNum?number/1024)?string("#.##")}GB<#else>${(c.leftNum?number)?string("#.##")}MB</#if>；\r\n</#if> </#list> 
-
+<#list cp as c>
+<#if c.bizType!="不限流量"><#assign cAll=c.sumNum?number><#assign cLeft=c.leftNum?number><#assign n1=n1+1>（${n1}）${c.privSet}，本月共<#if cAll gte 1024>${(cAll/1024)?string("#.##")}GB<#else>${cAll?string("#.##")}MB</#if>，剩余<#if cLeft gte 1024>${(cLeft/1024)?string("#.##")}GB<#else>${cLeft?string("#.##")}MB</#if><#if c.servType=="TPS_JZ_FLAG"><#assign syjzAll=c.startTime?number><#assign syjzLeft=c.startTime?number>，上月结转流量<#if syjzAll gte 1024>${(syjzAll/1024)?string("#.##")}GB<#else>${syjzAll?string("#.##")}MB</#if>，剩余<#if syjzLeft gte 1024>${(syjzLeft/1024)?string("#.##")}GB<#else>${syjzLeft?string("#.##")}MB</#if><#else>；</#if>；\r\n</#if>
+</#list>
 流量余量详情可点击安全链接：https://wx.online-cmcc.cn/website/personalHome/new/index 查看。 【中国移动】
 
 
+hb_001_sms01
+【话费查询】尊敬的客户，您好！截止本月${.now?string["dd日HH时"]}，您当月累计话费为${crf.result.realFee}元，话费余额${crf.result.curFee}元。您当月
+<#list qbd.beans as b>
+<#if b.col2=="package_fixed_fee" && b.col4 != "0.00">套餐及固定费用${b.col4}元，</#if>
+<#if b.col2=="callserv_fee" && b.col4 != "0.00">套餐外语音通信费${b.col4}元，</#if>
+<#if b.col2=="net_fee" && b.col4 != "0.00">套餐外上网费${b.col4}元，</#if>
+<#if b.col2=="sms_mms_fee" && b.col4 != "0.00">套餐外短彩信费${b.col4}元，</#if>
+<#if b.col2=="self_addvalue_fee" && b.col4 != "0.00">自有增值业务费${b.col4}元，</#if>
+<#if b.col2=="daishou_fee" && b.col4 != "0.00">代收费业务费用${b.col4}元，</#if>
+<#if b.col2=="other_fee" && b.col4 != "0.00">其他费用XX元，</#if>
+<#if b.col2=="BILL_REPPAY" && b.col4 != "0.00">代他人付XX元，</#if>
+</#list>
+账单合计费用${qbd.bean.totalFee}元。【中国移动】
 
 
+hb_030_sms01
+【套餐查询】尊敬的客户，您好！您各项套餐的准实时消费情况如下： 
+<#list qtu.beans as b>${b_index+1}、${b.privName}：已使用${b.usageVolume}，剩余${b.leftVolume}。</#list>
+【中国移动】
+
+
+hb_292_03
+<#assign zzf=0>
+<#assign dsf=0>
+<#assign tcwllf=0>
+<#list qbd.beans as b>
+<#if b.col2=="self_addvalue_fee"> <#assign zzf+=b.col4?number></#if>
+<#if b.col2=="daishou_fee"> <#assign dsf+=b.col4?number></#if>
+<#if b.col2=="BILL_NET"> <#assign tcwllf+=b.col4?number></#if>
+</#list>
+<#if zzf==0 && dsf gt 0><#assign zzf=dsf></#if>
+为您查询到，您本月异常消费有两项，一是产生增值业务费${zzf}元，增值业务查询退订方式已通过短信发送给您。二是产生套餐外流量费${tcwllf}元，请您注意您办理的流量套餐使用范围，比如夜间流量仅限夜间使用，视频流量仅限部分视频APP使用。如需办理通用流量，请说办理流量。
+
+
+hb_292_04
+<#assign zzf=0>
+<#assign dsf=0>
+<#assign tcwllf=0>
+<#list qbd.beans as b>
+<#if b.col2=="self_addvalue_fee"> <#assign zzf+=b.col4?number></#if>
+<#if b.col2=="daishou_fee"> <#assign dsf+=b.col4?number></#if>
+<#if b.col2=="BILL_NET"> <#assign tcwllf+=b.col4?number></#if>
+</#list>
+<#if zzf==0 && dsf gt 0><#assign zzf=dsf></#if>
+为您查询到，您本月异常消费有两项，一是产生增值业务费${zzf}元，增值业务查询退订方式已通过短信发送给您。二是产生套餐外流量费${tcwllf}元，您的流量套餐已用完，如需办理流量，请说办理流量。
+
+
+hb_292_05
+<#assign zzf=0>
+<#assign dsf=0>
+<#assign tcwllf=0>
+<#list qbd.beans as b>
+<#if b.col2=="self_addvalue_fee"> <#assign zzf+=b.col4?number></#if>
+<#if b.col2=="daishou_fee"> <#assign dsf+=b.col4?number></#if>
+<#if b.col2=="BILL_NET"> <#assign tcwllf+=b.col4?number></#if>
+</#list>
+<#if zzf==0 && dsf gt 0><#assign zzf=dsf></#if>
+为您查询到，您本月产生了增值业务费${zzf}元，增值业务查询退订方式已通过短信发送给您。
+
+
+
+hb_292_06
+<#assign tcwllf=0>
+<#list qbd.beans as b>
+<#if b.col2=="BILL_NET"> <#assign tcwllf+=b.col4?number></#if>
+</#list>
+为您查询到，您本月产生了套餐外流量费${tcwllf}元，请您注意您办理的流量套餐使用范围，比如夜间流量仅限夜间使用，视频流量仅限部分视频APP使用。如需办理流量，请说办理流量。
+
+
+hb_292_07
+<#assign tcwllf=0>
+<#list qbd.beans as b>
+<#if b.col2=="BILL_NET"> <#assign tcwllf+=b.col4?number></#if>
+</#list>
+为您查询到，您本月产生了套餐外流量费${tcwllf}元，您的流量套餐已用完，如需办理流量，请说办理流量。
+
+
+
+hb_292_08
+为您查询到，除套餐及正常通话费用外，您本月无异常消费
 
 
 

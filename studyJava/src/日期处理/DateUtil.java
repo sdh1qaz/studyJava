@@ -3,6 +3,8 @@ package 日期处理;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+
 import org.junit.Test;
 
 /**
@@ -85,6 +87,22 @@ public class DateUtil {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 	}
 	
+	/**
+	 * 是否已出账，true是，false否
+	 * 
+	 */
+	public static boolean isOutBill(String accountDay) {
+		String day = new SimpleDateFormat("dd").format(new Date());
+		System.out.println(day);
+		if (day.startsWith("0")) {
+			day = day.substring(1);
+		}
+		//出账日大于今天，表示没出账
+		if (Integer.valueOf(accountDay) > Integer.valueOf(day)) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 	/**
@@ -116,8 +134,11 @@ public class DateUtil {
 		System.out.println(less3Mon("20190125"));
 		System.out.println(getYestYMD());*/
 		//System.out.println("20191031 10:40".compareTo("20191031 10:31"));
-		System.out.println(get6DaysBefYMD());
-		System.out.println(getNowDate());
+		/*System.out.println(get6DaysBefYMD());
+		System.out.println(getNowDate());*/
+		System.out.println(isOutBill("16"));
+		System.out.println(isOutBill("3"));
+		
 	}
 
 }

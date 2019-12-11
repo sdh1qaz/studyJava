@@ -3,15 +3,13 @@ package 排序sort;
 import java.util.Arrays;
 
 /**
- * @ClassName： BubbleSort
- * @Author: dhSu
- * @Description:冒泡排序
- * @Date:Created in 2018年12月17日
+ * 冒泡排序
  */
 
 public class BubbleSort {
+	
 	public static void main(String[] args) {
-		int[] arr = new int[] {1,4,2,9,7,3,8,5,100,56};
+		int[] arr = new int[] {2,5,12,8,1,3,6,9,11};
 		bubbleSort(arr);
 		System.out.println(Arrays.toString(arr));
 	}
