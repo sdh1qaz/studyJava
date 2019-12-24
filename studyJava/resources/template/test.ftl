@@ -814,3 +814,43 @@ hb_00202_tts
 您[n2]${qbd.bean.beginDate?substring(4,6)}月月账单合计费用${qbd.bean.totalFee}元，消费明细已通过短信发送给您。
 
 
+
+hb_008_sms01
+【流量查询】尊敬的客户，您好！您的流量套餐准实时消费情况如下: 
+<#list qtu.beans as b>${b_index+1}、${b.privName}：已使用${b.usageVolume}，剩余${b.leftVolume}。</#list>
+以上信息仅供参考。【中国移动】
+
+hb_008_tts
+为您查询到，您本月可使用总流量为${sum?string("#.##")}M，剩余可用流量${left?string("#.##")}M，各分项流量及使用情况已经通过短信发送给您，请注意查收。
+
+
+
+hb_003_sms01：
+【协议款查询】尊敬的客户，您好！您目前有${qab.beans?size}个协议款，详情如下：
+<#list qab.beans as q>
+${q_index+1}、${q.privName}，本月返还${(q.curmontFee?number/100)?string("#.##")}元，已用${(q.usedFee?number/100)?string("#.##")}元，剩余${(q.leftFee?number/100)?string("#.##")}元。\r\n
+</#list>
+【中国移动】
+
+
+
+
+hb_200_sms01：
+【充值记录】尊敬的客户，您好！您最近${res?size}次的充值记录如下，
+<#list res?sort_by("payDate")?reverse as r>
+${r.payDate?substring(0,4)}年${r.payDate?substring(4,6)}月${r.payDate?substring(6,8)}日，您通过${r.payTypeName}（充值方式）充值${(r.amount?number/100)?string("#.##")}元<#if r_has_next>；<#else>。</#if>
+</#list>
+
+
+****年**月**日，您通过**（充值方式）充值**元；****年**月**日，您通过**（充值方式）充值**元；****年**月**日，您通过**（充值方式）充值**元。【中国移动】
+
+
+
+
+
+
+
+
+
+
+

@@ -29,8 +29,21 @@ public class PwdUtil {
 		return false;
 	}
 	
+	public static boolean isSimplePwd1(String pwd) {
+		String reg1 = "(\\d)\\1{1}(\\d)\\2{1}(\\d)\\3{1}";//匹配AABBCC
+		String reg2 = "(\\d)\\1{0}(\\d)\\2{4}";//匹配ABBBBB
+		String reg3 = "(\\d)\\1{1}(\\d)\\2{3}";//匹配AABBBB
+		String reg4 = "(\\d)\\1{2}(\\d)\\2{2}";//匹配AAABBB
+		String reg5 = "(\\d)\\1{3}(\\d)\\2{1}";//匹配AAAABB
+		String reg6 = "(\\d)\\1{4}(\\d)\\2{0}";//匹配AAAAAB
+		String reg7 = "(\\d)\\1{5}";//匹配AAAAAA
+		return pwd.matches(reg1) || pwd.matches(reg2) || pwd.matches(reg3)
+				|| pwd.matches(reg4) || pwd.matches(reg5) || pwd.matches(reg6)
+				|| pwd.matches(reg7);
+	}
+	
 	@Test
 	public void test() {
-		System.out.println(isSimplePwd("123456", "17737112692"));
+		System.out.println(isSimplePwd1("123456"));
 	}
 }
