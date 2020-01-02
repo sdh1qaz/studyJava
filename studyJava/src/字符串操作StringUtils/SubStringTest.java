@@ -29,6 +29,11 @@ public class SubStringTest {
 		System.out.println("puk2=" + puk2);
 	}
 	
+	@Test
+	public void test() {
+		String reg = "^((100)|(\\d{1,2}))$";
+		System.out.println("10".matches(reg));
+	}
 	
 
 }

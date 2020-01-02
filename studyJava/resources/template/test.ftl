@@ -846,7 +846,8 @@ ${r.payDate?substring(0,4)}年${r.payDate?substring(4,6)}月${r.payDate?substrin
 
 
 
-
+hb_090_01
+为您查询到，您已办理<#if pt?size gt 1><#list pt as p>${p}元，</#list>共${pt?size}个短信包。<#else>${pt[0]}元的短信包。</#if>
 
 
 
