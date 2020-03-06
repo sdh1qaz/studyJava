@@ -2,6 +2,7 @@ package double的加减乘除;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.junit.Test;
 
@@ -20,5 +21,13 @@ public class MinusTest {
 		hm.put("你好", "hello");
 		System.out.println(hm.get("你好"));
 		System.out.println(2.33 < 2.4);
+		System.out.println(Double.valueOf("5"));
+		System.out.println((int)(6.673));
+		System.out.println(6.09+7.23010001);
+		System.out.println((int)(46.64*100));
+		String string = UUID.randomUUID().toString().replace("-", "").toUpperCase();
+		System.out.println(string);
+		System.out.println("你好"+ System.getProperty("line.separator") + "春天");
 	}
+	
 }
