@@ -116,6 +116,13 @@ public class DateUtil {
 	}
 	
 	/**
+	 * 获取时间戳，如202003111755047
+	 */
+	public static String getYMDHmss() {
+		return new SimpleDateFormat("yyyyMMddHHmmsss").format(new Date());
+	}
+	
+	/**
 	 * 给定一个时间字符串yyyyMMdd，判断距离现在是否在3个月以内（含）
 	 */
 	public static boolean less3Mon(String date) {
@@ -137,7 +144,8 @@ public class DateUtil {
 		/*System.out.println(get6DaysBefYMD());
 		System.out.println(getNowDate());*/
 		System.out.println(isOutBill("16"));
-		System.out.println(isOutBill("3"));
+		System.out.println(getYMDHmss());
+		System.out.println((long)((Math.random()*9+1)*10000));
 		
 	}
 

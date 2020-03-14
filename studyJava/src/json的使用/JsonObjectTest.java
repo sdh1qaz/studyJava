@@ -23,6 +23,14 @@ import com.google.gson.JsonObject;
 
 public class JsonObjectTest {
 	
+	@Test
+	public void test() {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("name", "sudenghui");
+		jsonObject.put("name", "sudenghui00");
+		System.out.println(jsonObject);
+	}
+	
 	/**
 	 * 测试用内部类接收多层json
 	 */

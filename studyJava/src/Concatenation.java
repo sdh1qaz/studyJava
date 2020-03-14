@@ -10,6 +10,7 @@ public class Concatenation {
 		String mango = "mango";
 		String s = "abc" + mango + "def" +47;
 		System.out.println(s);
+		System.out.println("测试" + "nihao".replace("ni", "89"));
 	}
 
 }
