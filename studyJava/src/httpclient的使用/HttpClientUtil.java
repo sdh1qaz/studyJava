@@ -62,9 +62,15 @@ public class HttpClientUtil {
 		return result;
 	}
 	
+	/*public static String sendGet() {
+		
+	} */
+	
 	
 	@Test
 	public void test() {
-		System.out.println(sendPost("http://127.0.0.1:8687/user/items/getItems", ""));
+		for (int i = 0; i < 10000; i++) {
+			sendPost("http://127.0.0.1:8080/dbmanager/execSql.html", "");
+		}
 	}
 }
