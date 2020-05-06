@@ -6,7 +6,7 @@ package 并发concurrency;
  * @Date:Created in 2018年4月1日
  */
 
-public class MyThread implements Runnable{
+public class MyThread implements Runnable{  
     private UnsafeSequence unsafeSequence;
     
     public MyThread(UnsafeSequence unsafeSequence) {

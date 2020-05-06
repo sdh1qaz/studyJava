@@ -5,8 +5,10 @@ package 控制cpu占用率的程序;
  * @Description:控制cpu占比的程序，运行：java Provider 0.1 48 200
  * 0.1是需要的cpu占用比，48是cpu逻辑核数，200是线程时间单位毫秒数（可微调）
  * @Date:Created in 2019年6月11日
+ * 
  */
 
+//编译后启动命令：java  Provider  0.2  48  200
 public class Provider extends Thread {
 	/*参考：https://blog.csdn.net/godloveleo9527/article/details/46665425
 	需要在运行时传入以下参数：需要的CPU占用百分比；CPU逻辑核数；线程单位总时毫秒数（可微调）*/

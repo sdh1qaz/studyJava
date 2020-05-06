@@ -24,4 +24,18 @@ public class ReplaceAllTest {
 		desc = deString.replace("改用户订购了[", "");
 		System.out.println(desc);
 	}
+	
+	@Test
+	public void test1() {
+		String desc = "你好\t世界";
+		System.out.println(desc);
+		System.out.println(desc.replace("\t", ""));
+	}
+	
+	@Test
+	public void test2() {
+		String desc = "你好\\t世界";
+		System.out.println(desc);
+		System.out.println(desc.replace("\\t", ""));
+	}
 }

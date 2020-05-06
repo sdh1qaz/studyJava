@@ -270,6 +270,27 @@ public class FreemarkerTest {
 		System.out.println("模板填充后的内容：\n" + ttsContent);
 	}
 	
+	/**
+	 * 测试.now
+	 */
+	@Test
+	public void testNow(){
+		//模版
+		String template = "当前年月：${.now?string[\"YYYY年MM月\"]?replace(\"年\",\"年[n2]555\")}";
+		//模版数据
+		HashMap<String, Object> paramMap = new HashMap<>();
+		//模板转换的最终内容
+		String ttsContent;
+		try {
+			ttsContent = getContent(template,paramMap);
+		} catch (Exception e) {
+			ttsContent = "拼接异常";
+			System.out.println("组装模版出现异常");
+			e.printStackTrace();
+		}
+		System.out.println("模板填充后的内容：\n" + ttsContent);
+	}
+	
 	public static String getContent(String template,HashMap<String, Object> paramMap) throws Exception {
 		//获取freemarker连接
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
