@@ -9,6 +9,7 @@ package com.dhsu.lang;
 public class DoubleTest {
 	public static void main(String[] args) {
 		Double d = new Double(11.5893);
+		System.out.println(1.00 / 48);
 		System.out.println(d.toString());
 	}
 

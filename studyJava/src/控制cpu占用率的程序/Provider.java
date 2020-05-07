@@ -9,7 +9,7 @@ package 控制cpu占用率的程序;
  */
 
 //编译后启动命令：java  Provider  0.2  48  200
-public class Provider extends Thread {
+public class Provider {
 	/*参考：https://blog.csdn.net/godloveleo9527/article/details/46665425
 	需要在运行时传入以下参数：需要的CPU占用百分比；CPU逻辑核数；线程单位总时毫秒数（可微调）*/
 	public static void main(String[] args) {
@@ -26,12 +26,13 @@ public class Provider extends Thread {
 		System.out.println("需要占用的cpu的百分比(如10%就是输入0.1)：" + args[0]);
 		System.out.println("cpu逻辑核数：" + args[1]);
 		System.out.println("线程单位时长ms：" + args[2]);
-		double p = Double.parseDouble(args[0]);
-		double b_i = Integer.parseInt(args[1]) * 0.1 * p;
-		int unit = Integer.parseInt(args[2]);
+		double p = Double.parseDouble(args[0]);//cpu占用率
+		double b_i = Integer.parseInt(args[1]) * p * 1.00 / 48;//忙时比
+		int unit = Integer.parseInt(args[2]);//线程时间单位，比如200，代指200ms
 		
 		System.out.println("程序开始运行.....");
-		for(int i=0;i<10;i++) {
+		//开启和逻辑核数相同的线程数。48核开48个线程
+		for(int i=0;i<48;i++) {
 			new Thread(new CpuOccupy(b_i,unit)).start();
 		}
 	}
