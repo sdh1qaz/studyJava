@@ -116,4 +116,14 @@ public class FreemarkerDemo {
 		System.out.println(5.00+8);
 		System.out.println(Double.valueOf("1000"));*/
 	}
+	
+	/**
+	 * freemarker测试
+	 */
+	@Test
+	public void test2() throws Exception {
+		Map<String, Object> paramsMap = new HashMap<String, Object>();
+		paramsMap.put("cr", "-23.45");
+		System.out.println(getTtsSmsStr("test2.ftl", paramsMap));
+	}
 }

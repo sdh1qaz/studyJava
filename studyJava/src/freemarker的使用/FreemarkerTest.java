@@ -291,6 +291,33 @@ public class FreemarkerTest {
 		System.out.println("模板填充后的内容：\n" + ttsContent);
 	}
 	
+	/**
+	 * 测试list的大小
+	 * list?size
+	 */
+	@Test
+	public void testListSize(){
+		//模版
+		String template = "list的大小是：${list?size}";
+		List<Student> list = new ArrayList<>();
+		for(int i=0;i<100;i++) {
+			list.add(new Student());
+		}
+		//模版数据
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("list", list);
+		//模板生成的内容
+		String content;
+		try {
+			content = getContent(template,paramMap);
+		} catch (Exception e) {
+			content = "拼接异常";
+			System.out.println("组装模版出现异常");
+			e.printStackTrace();
+		}
+		System.out.println("模板填充后的内容：\n" + content);
+	}
+	
 	public static String getContent(String template,HashMap<String, Object> paramMap) throws Exception {
 		//获取freemarker连接
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
