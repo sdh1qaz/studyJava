@@ -318,6 +318,30 @@ public class FreemarkerTest {
 		System.out.println("模板填充后的内容：\n" + content);
 	}
 	
+	/**
+	 * 测试replace
+	 * 正则
+	 */
+	@Test
+	public void testReplace(){
+		//模版
+		String str = "你好，冲最小扣应冲，有效期24个月，已返还";
+		String template = "${str?replace('冲最小扣应冲，有效期24个月，','已返还')?replace('冲最小扣应冲','')}";
+		//模版数据
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("str", str);
+		//模板生成的内容
+		String content;
+		try {
+			content = getContent(template,paramMap);
+		} catch (Exception e) {
+			content = "拼接异常";
+			System.out.println("组装模版出现异常");
+			e.printStackTrace();
+		}
+		System.out.println("模板填充后的内容：\n" + content);
+	}
+	
 	public static String getContent(String template,HashMap<String, Object> paramMap) throws Exception {
 		//获取freemarker连接
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
