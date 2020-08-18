@@ -96,10 +96,50 @@ public class ShareTpsSkills {
 	}
 	
 	/**
-	 * 使用JSONObject组装json字符串--一种比直接拼接直观的方法
+	 * 取绝对值
 	 */
 	@Test
 	public void test4() {
+		String template = "fee的绝对值：${fee?abs}";
+		//数据
+		HashMap<String, Object> dataMap = new HashMap<>();
+		dataMap.put("fee", -5);
+		//合成内容
+		String content;
+		try {
+			content = getContent(template,dataMap);
+		} catch (Exception e) {
+			content = "组装模版出现异常";
+			e.printStackTrace();
+		}
+		System.out.println("合成后的内容：\n" + content);
+	}
+	
+	/**
+	 * .now?string["yyyyMM"]
+	 */
+	@Test
+	public void test5(){
+		String template = "当前年月：${.now?string[\"yyyy年MM月\"]}";
+		//数据
+		HashMap<String, Object> dataMap = new HashMap<>();
+		//合成内容
+		String content;
+		try {
+			content = getContent(template,dataMap);
+		} catch (Exception e) {
+			content = "组装模版出现异常";
+			e.printStackTrace();
+		}
+		System.out.println("合成后的内容：\n" + content);
+	}
+	
+	
+	/**
+	 * 使用JSONObject组装json字符串--一种比直接拼接直观的方法
+	 */
+	@Test
+	public void test6() {
 		//方法一：拼接
 		String jsonStr1 = "{\"name\":\"张三\",\"age\":\"20\"}";
 		//方法二：使用JSONObject
@@ -111,7 +151,27 @@ public class ShareTpsSkills {
 		System.out.println("方法2：" + jsonStr2);
 	}
 	
-	
+	/**
+	 * 电话号码中间四位显示*
+	 */
+	@Test
+	public void test7() {
+		String template = "${telnum?substring(0,3)}****${telnum?substring(7)}";
+		//数据
+		HashMap<String, Object> dataMap = new HashMap<>();
+		String telnum = "11114426000";
+		dataMap.put("telnum", telnum);
+		//合成内容
+		String content;
+		try {
+			content = getContent(template,dataMap);
+		} catch (Exception e) {
+			content = "组装模版出现异常";
+			e.printStackTrace();
+		}
+		System.out.println("合成前的内容：\n" + telnum);
+		System.out.println("合成后的内容：\n" + content);
+	}
 	
 	
 	//费用类
