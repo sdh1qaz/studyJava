@@ -44,6 +44,34 @@ public class ShareTpsSkills {
 	}
 	
 	/**
+	 * 取列表的第1个元素
+	 * ?size
+	 */
+	@Test
+	public void test8() {
+		//模板
+		String template = "列表第1个元素：${fl[1].name}";
+		System.out.println("模板内容template=：" + template);
+		//数据
+		HashMap<String, Object> dataMap = new HashMap<>();
+		List<Fee> feeList = new ArrayList<>();
+		feeList.add(new Fee("套餐及固定费", "30"));
+		feeList.add(new Fee("他人代付", "30"));
+		feeList.add(new Fee("套餐外费用", "30"));
+		feeList.add(new Fee("优惠费", "10"));
+		dataMap.put("fl", feeList);
+		//合成内容
+		String content;
+		try {
+			content = getContent(template,dataMap);
+		} catch (Exception e) {
+			content = "组装模版出现异常";
+			e.printStackTrace();
+		}
+		System.out.println("合成后的内容：\n" + content);
+	}
+	
+	/**
 	 * 短信展示列表时最后一个项以句号结尾，其他项用逗号
 	 * <#if f_has_next>，<#else>。</#if>
 	 */
